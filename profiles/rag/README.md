@@ -1,0 +1,5 @@
+# RAG 프로파일
+
+RAG(Retrieval-Augmented Generation) 시스템에서 활용할 수 있는 문서·청크·임베딩 메타데이터 구성을 정의합니다. DCAT v3 + schema.org를 핵심 어휘로 채택합니다.
+
+상세 정의는 프레임워크 정의서(B-3 산출물) 완성 후 본 디렉토리에 추가됩니다.

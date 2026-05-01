@@ -1,0 +1,28 @@
+# CODEOWNERS — 본 저장소의 영역별 코드 소유자
+# 모든 PR은 해당 영역 소유자의 리뷰 승인을 필수로 합니다.
+#
+# 형식: <패턴>  @owner1 @owner2
+# 사업 진행에 따라 실제 GitHub 핸들로 교체합니다.
+
+# 기본 소유자 (PM)
+*                              @tta-pm
+
+# 표준 영역 (5종 파일럿) — 김장원 교수
+/standards/                    @tta-pm @tta-tech-lead
+
+# 프로파일 영역 — 박천웅 박사 + 김장원 교수
+/profiles/                     @tta-pm @tta-standards-lead @tta-tech-lead
+
+# 검증 도구 — 김장원 교수
+/tools/                        @tta-tech-lead
+
+# 프레임워크·매뉴얼 — 박천웅 박사 + PM
+/docs/framework/               @tta-pm @tta-standards-lead
+/docs/manuals/                 @tta-pm
+/docs/repository/              @tta-pm @tta-tech-lead
+
+# CI/거버넌스 — PM 단독 승인
+/.github/                      @tta-pm
+/CODEOWNERS                    @tta-pm
+/LICENSE                       @tta-pm
+/CONTRIBUTING.md               @tta-pm
