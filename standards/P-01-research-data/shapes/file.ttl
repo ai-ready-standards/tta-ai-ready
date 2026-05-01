@@ -1,0 +1,100 @@
+# File SHACL shapes — TTAK.KO-10.0976 §6.4 (F1~F19)
+
+@prefix sh:        <http://www.w3.org/ns/shacl#> .
+@prefix dcat:      <http://www.w3.org/ns/dcat#> .
+@prefix dct:       <http://purl.org/dc/terms/> .
+@prefix tta:       <https://standards.tta.or.kr/ai-ready/research-data/v1#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+
+tta:FileShape
+    a sh:NodeShape ;
+    sh:targetClass dcat:Distribution ;
+    rdfs:label "TTAK.KO-10.0976 File Shape (F1~F19)" ;
+
+    # F2 Identifier (M)
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[F2] File must have at least one dct:identifier" ;
+    ] ;
+
+    # F2.1 IdentifierType (M, CVP)
+    sh:property [
+        sh:path tta:identifierType ;
+        sh:minCount 1 ;
+        sh:in ( "ARK" "arXiv" "bibcode" "DOI" "EAN13" "EISSN" "Handle"
+                "ISBN" "ISSN" "ISTC" "LISSN" "LSID" "PMID" "PURL"
+                "UPC" "URL" "URN" "URI" "UCI" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[F2.1] tta:identifierType is mandatory and must be from IdentifierType vocabulary" ;
+    ] ;
+
+    # F3 Title (M)
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[F3] File must have at least one dct:title" ;
+    ] ;
+
+    # F4 Creator (M)
+    sh:property [
+        sh:path dct:creator ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[F4] File must have at least one dct:creator" ;
+    ] ;
+
+    # F5 Publisher (M)
+    sh:property [
+        sh:path dct:publisher ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[F5] File must have at least one dct:publisher" ;
+    ] ;
+
+    # F6 PublicationYear (M)
+    sh:property [
+        sh:path dct:issued ;
+        sh:minCount 1 ;
+        sh:datatype xsd:gYear ;
+        sh:severity sh:Violation ;
+        sh:message "[F6] File must have dct:issued (publicationYear) as xsd:gYear" ;
+    ] ;
+
+    # F8.1 DateType (M when F8 present)
+    sh:property [
+        sh:path tta:dateType ;
+        sh:in ( "Accepted" "Available" "Copyrighted" "Collected" "Created"
+                "Issued" "Submitted" "Updated" "Valid" ) ;
+        sh:severity sh:Warning ;
+        sh:message "[F8.1] tta:dateType (when date present) must be from FileDateType vocabulary" ;
+    ] ;
+
+    # F17 Type (O, DCMI FileType)
+    sh:property [
+        sh:path dct:type ;
+        sh:in ( "Event" "Image" "InteractiveResource" "MovingImage"
+                "PhysicalObject" "Service" "Software" "Sound"
+                "StillImage" "Text" "other" ) ;
+        sh:severity sh:Info ;
+        sh:message "[F17] dct:type (if present) must be from DCMI FileType vocabulary" ;
+    ] ;
+
+    # F19 Size (O, but with type constraint when present)
+    sh:property [
+        sh:path dcat:byteSize ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:severity sh:Info ;
+        sh:message "[F19] dcat:byteSize (if present) must be a non-negative integer" ;
+    ] ;
+
+    # F19.1 Unit (O, CVP — if F19 present, recommend Unit)
+    sh:property [
+        sh:path tta:sizeUnit ;
+        sh:in ( "Byte" "Mega Byte" "Giga Byte" "Tera Byte" ) ;
+        sh:severity sh:Info ;
+        sh:message "[F19.1] tta:sizeUnit (if present) must be from FileSizeUnitType vocabulary" ;
+    ] .

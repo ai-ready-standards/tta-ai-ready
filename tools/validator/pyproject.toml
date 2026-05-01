@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tta-ai-ready-validator"
+version = "0.1.0"
+description = "TTA AI 레디 표준 적합성 자동 검증 CLI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "TTA AI-Ready Standards Project"}]
+keywords = ["TTA", "AI-Ready", "metadata", "SHACL", "JSON-LD"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "pyshacl>=0.25",
+    "rdflib>=7.0",
+    "pyld>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "ruff",
+]
+
+[project.scripts]
+tta-validator = "tta_validator.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+tta_validator = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

@@ -1,0 +1,9 @@
+{
+  "@context": "../../schema/context.jsonld",
+  "id": "https://example.org/collection/kisti-research-data",
+  "type": "Collection",
+
+  "identifier": "https://example.org/collection/kisti-research-data",
+  "identifierType": "URI",
+  "title": {"en": "KISTI Research Data Collection"}
+}

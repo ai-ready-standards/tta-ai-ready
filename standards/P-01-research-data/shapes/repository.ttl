@@ -1,0 +1,173 @@
+# Repository SHACL shapes — TTAK.KO-10.0976 §7 (R1~R21)
+
+@prefix sh:        <http://www.w3.org/ns/shacl#> .
+@prefix dcat:      <http://www.w3.org/ns/dcat#> .
+@prefix dct:       <http://purl.org/dc/terms/> .
+@prefix tta:       <https://standards.tta.or.kr/ai-ready/research-data/v1#> .
+@prefix schema:    <https://schema.org/> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+
+tta:RepositoryShape
+    a sh:NodeShape ;
+    sh:targetClass dcat:DataService ;
+    rdfs:label "TTAK.KO-10.0976 Repository Shape (R1~R21)" ;
+
+    # R2 RepositoryUrl (M)
+    sh:property [
+        sh:path dcat:endpointURL ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "[R2] Repository must have dcat:endpointURL as IRI" ;
+    ] ;
+
+    # R3 Identifier (M)
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R3] Repository must have at least one dct:identifier" ;
+    ] ;
+
+    # R3.1 IdentifierType (M)
+    sh:property [
+        sh:path tta:identifierType ;
+        sh:minCount 1 ;
+        sh:in ( "ARK" "arXiv" "bibcode" "DOI" "EAN13" "EISSN" "Handle"
+                "ISBN" "ISSN" "ISTC" "LISSN" "LSID" "PMID" "PURL"
+                "UPC" "URL" "URN" "URI" "UCI" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R3.1] tta:identifierType is mandatory and must be from IdentifierType vocabulary" ;
+    ] ;
+
+    # R4 RepositoryName (M)
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R4] Repository must have dct:title (repository name)" ;
+    ] ;
+
+    # R5 Type (M, CVP)
+    sh:property [
+        sh:path dct:type ;
+        sh:minCount 1 ;
+        sh:in ( "disciplinary" "governmental" "institutional"
+                "multidisciplinary" "project-related" "other" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R5] dct:type is mandatory and must be from RepositoryType vocabulary" ;
+    ] ;
+
+    # R6 RepositoryLanguage (M)
+    sh:property [
+        sh:path dct:language ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R6] dct:language is mandatory (ISO-639-3 code)" ;
+    ] ;
+
+    # R7 Subject (M)
+    sh:property [
+        sh:path dct:subject ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R7] dct:subject is mandatory" ;
+    ] ;
+
+    # R8 InstitutionName (M)
+    sh:property [
+        sh:path schema:legalName ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R8] schema:legalName (institutionName) is mandatory" ;
+    ] ;
+
+    # R9 InstitutionCountry (M, ISO 3166-1 alpha-3)
+    sh:property [
+        sh:path schema:addressCountry ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{3}$" ;
+        sh:severity sh:Violation ;
+        sh:message "[R9] schema:addressCountry must be ISO 3166-1 alpha-3 code (3 uppercase letters)" ;
+    ] ;
+
+    # R10 DatabaseAccessType (M, CVP)
+    sh:property [
+        sh:path tta:databaseAccessType ;
+        sh:minCount 1 ;
+        sh:in ( "open" "restricted" "closed" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R10] tta:databaseAccessType is mandatory and must be: open, restricted, closed" ;
+    ] ;
+
+    # R11 DataAccessType (M, CVP)
+    sh:property [
+        sh:path tta:dataAccessType ;
+        sh:minCount 1 ;
+        sh:in ( "open" "embargoed" "restricted" "closed" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R11] tta:dataAccessType is mandatory and must be from DatasetAccessType vocabulary" ;
+    ] ;
+
+    # R12 DataLicenseName (M)
+    sh:property [
+        sh:path tta:dataLicenseName ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[R12] tta:dataLicenseName is mandatory" ;
+    ] ;
+
+    # R13 DataLicenseUrl (M, IRI)
+    sh:property [
+        sh:path dct:license ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Violation ;
+        sh:message "[R13] dct:license must be an IRI (e.g., CC license URL)" ;
+    ] ;
+
+    # R14 DataUpload (M, CVP)
+    sh:property [
+        sh:path tta:dataUpload ;
+        sh:minCount 1 ;
+        sh:in ( "open" "restricted" "closed" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R14] tta:dataUpload is mandatory and must be: open, restricted, closed" ;
+    ] ;
+
+    # R15 Versioning (M, CVP)
+    sh:property [
+        sh:path tta:versioning ;
+        sh:minCount 1 ;
+        sh:in ( "yes" "no" "unknown" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R15] tta:versioning is mandatory and must be: yes, no, unknown" ;
+    ] ;
+
+    # R16 EnhancedPublication (M, CVP)
+    sh:property [
+        sh:path tta:enhancedPublication ;
+        sh:minCount 1 ;
+        sh:in ( "yes" "no" "unknown" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R16] tta:enhancedPublication is mandatory and must be: yes, no, unknown" ;
+    ] ;
+
+    # R17 QualityManagement (M, CVP)
+    sh:property [
+        sh:path tta:qualityManagement ;
+        sh:minCount 1 ;
+        sh:in ( "yes" "no" "unknown" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[R17] tta:qualityManagement is mandatory and must be: yes, no, unknown" ;
+    ] ;
+
+    # R19 ResponsibilityType (O, CVP)
+    sh:property [
+        sh:path tta:responsibilityType ;
+        sh:in ( "funding" "general" "main" "sponsoring" "technical" "other" ) ;
+        sh:severity sh:Info ;
+        sh:message "[R19] tta:responsibilityType (if present) must be from ResponsibilityType vocabulary" ;
+    ] .

@@ -21,41 +21,24 @@ jobs:
           python-version: "3.11"
           # cache: pip — pyproject.toml / requirements.txt 추가 후 활성화
 
-      - name: Install validator dependencies
+      - name: Install validator
         run: |
           python -m pip install --upgrade pip
-          # Validator 도구 (WBS C-10) 완성 후 교체
-          pip install pyshacl rdflib pyld pytest
+          pip install -e tools/validator/
 
-      - name: 1. RDF 문법 검증
+      - name: 1. 유효 예시 검증 (M 위반 0건이어야 함)
         run: |
-          echo "RDF 문법 검증 — pySHACL/rdflib 기반"
-          # find standards profiles -name '*.ttl' -exec python -c "import sys, rdflib; g=rdflib.Graph(); g.parse(sys.argv[1])" {} \;
-          echo "(파일럿 산출물 추가 시 활성화)"
+          tta-validator \
+            standards/P-01-research-data/examples/valid/ \
+            --shapes-dir standards/P-01-research-data/shapes \
+            --ci
 
-      - name: 2. SHACL 적합성 검증
+      - name: 2. 음성 테스트 (의도된 M 위반 발생해야 함)
         run: |
-          echo "SHACL 적합성 검증 — pySHACL"
-          # for shape in $(find standards -name 'shapes/*.ttl'); do pyshacl ...; done
-          echo "(파일럿 산출물 추가 시 활성화)"
-
-      - name: 3. JSON-LD @context 유효성
-        run: |
-          echo "JSON-LD @context 유효성 — pyld"
-          # find standards -name '*.jsonld' -exec ...
-          echo "(파일럿 산출물 추가 시 활성화)"
-
-      - name: 4. Python 단위 테스트
-        run: |
-          echo "Python 단위 테스트 — pytest"
-          # pytest tools/validator/tests/ --cov=tools/validator --cov-fail-under=80
-          echo "(검증 도구 완성 후 활성화)"
-
-      - name: 5. 예시 데이터셋 로딩
-        run: |
-          echo "예시 데이터셋 로딩 테스트"
-          # python -m tools.validator load-examples standards/
-          echo "(파일럿 산출물 추가 시 활성화)"
+          tta-validator \
+            standards/P-01-research-data/examples/invalid/ \
+            --shapes-dir standards/P-01-research-data/shapes \
+            --expect-fail
 
   lint:
     name: 코드 린트
@@ -68,4 +51,4 @@ jobs:
       - name: Install linters
         run: pip install ruff
       - name: Ruff
-        run: ruff check . || echo "(Python 코드 추가 후 엄격 모드로 전환)"
+        run: ruff check tools/ || echo "(린트 경고 — 후속 PR에서 정리)"
