@@ -1,0 +1,163 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dct": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "title": {"@id": "dct:title", "@container": "@language"},
+    "description": {"@id": "dct:description", "@container": "@language"},
+    "identifier": "dct:identifier",
+    "publisher": {"@id": "dct:publisher", "@type": "@id"},
+    "license": {"@id": "dct:license", "@type": "@id"},
+    "issued": {"@id": "dct:issued", "@type": "xsd:date"},
+    "modified": {"@id": "dct:modified", "@type": "xsd:date"},
+    "language": "dct:language",
+    "keyword": "dcat:keyword",
+    "theme": {"@id": "dcat:theme", "@type": "@id"},
+    "homepage": {"@id": "schema:url", "@type": "@id"},
+    "dataset": "dcat:dataset",
+    "distribution": "dcat:distribution",
+    "downloadURL": {"@id": "dcat:downloadURL", "@type": "@id"},
+    "accessURL": {"@id": "dcat:accessURL", "@type": "@id"},
+    "mediaType": "dcat:mediaType",
+    "byteSize": {"@id": "dcat:byteSize", "@type": "xsd:nonNegativeInteger"},
+    "conformsTo": {"@id": "dct:conformsTo", "@type": "@id"},
+    "Catalog": "dcat:Catalog",
+    "Dataset": "dcat:Dataset",
+    "Distribution": "dcat:Distribution",
+    "Concept": "skos:Concept"
+  },
+
+  "@id": "https://github.com/ai-ready-standards/tta-ai-ready",
+  "@type": ["Catalog", "schema:DataCatalog"],
+
+  "title": {
+    "ko": "TTA AI 레디 표준 카탈로그",
+    "en": "TTA AI-Ready Standards Catalog"
+  },
+  "description": {
+    "ko": "한국정보통신기술협회(TTA) AI 레디(AI-Ready) 표준 생태계 조성 사업의 5종 시범 표준을 모은 공개 카탈로그입니다.",
+    "en": "Public catalog of 5 pilot standards from TTA AI-Ready Standards Initiative (2026)."
+  },
+  "identifier": "https://github.com/ai-ready-standards/tta-ai-ready",
+  "publisher": "https://www.tta.or.kr",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "issued": "2026-05-01",
+  "language": ["ko", "en"],
+  "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/",
+  "keyword": [
+    "AI-ready", "metadata", "TTA", "PG606",
+    "research data", "public data", "AI training data",
+    "agriculture", "steel manufacturing",
+    "DCAT", "Croissant", "PROV-O", "JSON-LD", "SHACL"
+  ],
+
+  "dataset": [
+    {
+      "@id": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-01-research-data",
+      "@type": ["Dataset", "schema:Dataset"],
+      "identifier": "TTAK.KO-10.0976",
+      "title": {
+        "ko": "연구데이터 관리 및 공유를 위한 메타데이터",
+        "en": "Metadata for managing and sharing research data"
+      },
+      "description": {
+        "ko": "과학기술 연구 분야의 컬렉션·데이터셋·파일·리포지토리 4계층 메타데이터 표준을 AI 레디 패키지로 변환한 것."
+      },
+      "issued": "2017-03-30",
+      "modified": "2026-05-01",
+      "publisher": "https://www.tta.or.kr",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "language": ["ko", "en"],
+      "keyword": ["research data", "DataCite", "DCAT v3", "PROV-O"],
+      "theme": "https://ai-ready-standards.github.io/tta-ai-ready/themes/research-data",
+      "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/standards/p-01/",
+      "distribution": [
+        {
+          "@type": "Distribution",
+          "title": {"en": "JSON-LD Context"},
+          "downloadURL": "https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/schema/context.jsonld",
+          "mediaType": "application/ld+json"
+        },
+        {
+          "@type": "Distribution",
+          "title": {"en": "SHACL Shapes"},
+          "accessURL": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-01-research-data/shapes",
+          "mediaType": "text/turtle"
+        }
+      ]
+    },
+    {
+      "@id": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-02-public-data",
+      "@type": ["Dataset", "schema:Dataset"],
+      "title": {
+        "ko": "공공데이터 메타데이터 기술 규칙 (P-02)",
+        "en": "Public Data Metadata Description Rules"
+      },
+      "description": {
+        "ko": "행안부 공공데이터포털의 메타데이터를 DCAT v3와 CC 라이선스 URI 기반으로 AI 레디화."
+      },
+      "publisher": "https://www.tta.or.kr",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "language": ["ko"],
+      "keyword": ["public data", "DCAT v3", "CC license"],
+      "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/standards/p-02/"
+    },
+    {
+      "@id": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-03-tagging-labeling",
+      "@type": ["Dataset", "schema:Dataset"],
+      "identifier": "TTAK.KO-10.1343-Part2",
+      "title": {
+        "ko": "비정형 데이터 태깅·라벨링 (P-03)",
+        "en": "Unstructured Data Tagging and Labeling"
+      },
+      "description": {
+        "ko": "AI 학습데이터의 태깅·라벨링 표준을 Croissant RAI + DUO 기반으로 AI 레디화."
+      },
+      "publisher": "https://www.tta.or.kr",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "language": ["ko"],
+      "keyword": ["AI training data", "Croissant", "RAI", "DUO"],
+      "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/standards/p-03/"
+    },
+    {
+      "@id": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-04-agriculture",
+      "@type": ["Dataset", "schema:Dataset"],
+      "identifier": "TTAK.KO-10.1533",
+      "title": {
+        "ko": "농업 AI 학습 데이터 플랫폼 메타데이터 (P-04)",
+        "en": "Agricultural AI Training Data Platform Metadata"
+      },
+      "description": {
+        "ko": "농업 분야 AI 학습 데이터 메타데이터를 Croissant + ISO/IEC 5259 품질 차원과 결합."
+      },
+      "issued": "2024-12-01",
+      "publisher": "https://www.tta.or.kr",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "language": ["ko"],
+      "keyword": ["agriculture", "Croissant", "ISO 5259"],
+      "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/standards/p-04/"
+    },
+    {
+      "@id": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-05-steel-manufacturing",
+      "@type": ["Dataset", "schema:Dataset"],
+      "identifier": "TTAK.KO-10.1571",
+      "title": {
+        "ko": "철강산업 제조업 데이터 공유 메타데이터 (P-05)",
+        "en": "Steel Manufacturing Data Sharing Metadata"
+      },
+      "description": {
+        "ko": "철강 제조 공정 데이터를 IEC 62264 + PROV-O 계보 추적과 결합한 AI 레디 패키지."
+      },
+      "issued": "2025-06-01",
+      "publisher": "https://www.tta.or.kr",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "language": ["ko"],
+      "keyword": ["steel manufacturing", "IEC 62264", "PROV-O"],
+      "homepage": "https://ai-ready-standards.github.io/tta-ai-ready/standards/p-05/"
+    }
+  ]
+}
