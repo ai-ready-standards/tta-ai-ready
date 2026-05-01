@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: pip
+          # cache: pip — pyproject.toml / requirements.txt 추가 후 활성화
 
       - name: Install validator dependencies
         run: |
