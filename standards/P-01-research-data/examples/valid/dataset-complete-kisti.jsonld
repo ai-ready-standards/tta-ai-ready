@@ -1,0 +1,59 @@
+{
+  "@context": "../../schema/context.jsonld",
+  "id": "https://doi.org/10.22711/idr/example-narda-2026-01",
+  "type": "Dataset",
+
+  "identifier": "https://doi.org/10.22711/idr/example-narda-2026-01",
+  "identifierType": "DOI",
+
+  "title": {
+    "ko": "한국과학기술정보연구원 연구데이터 예시 데이터셋",
+    "en": "KISTI Research Data Example Dataset"
+  },
+  "titleType": "AlternativeTitle",
+
+  "creator": [
+    {
+      "type": "Person",
+      "id": "https://orcid.org/0000-0000-0000-0001",
+      "name": "김선태",
+      "email": "kistiman@gmail.com"
+    }
+  ],
+  "publisher": {
+    "type": "Organization",
+    "id": "https://ror.org/00x0ma614",
+    "name": "한국과학기술정보연구원"
+  },
+  "publicationYear": "2026",
+
+  "date": "2026-05-01",
+  "dateType": "Created",
+
+  "description": {
+    "ko": "본 데이터셋은 TTAK.KO-10.0976 표준의 AI 레디 패키지 예시로 사용된다.",
+    "en": "This dataset is an example for the AI-Ready package of TTAK.KO-10.0976."
+  },
+
+  "subject": {
+    "subjectScheme": "DFG",
+    "subjectId": "409",
+    "subjectName": {"en": "Computer Science"}
+  },
+
+  "contributor": {
+    "type": "Organization",
+    "name": "Ministry of Science and ICT, Korea"
+  },
+  "contributorType": "Funder",
+
+  "contact": "kistiman@gmail.com",
+  "rights": "Open access under CC BY 4.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keyword": ["AI-ready metadata", "research data", "TTA standard"],
+  "accessType": "open",
+  "accessRestriction": "free",
+
+  "wasGeneratedBy": "https://example.org/activity/kisti-narda-pilot-2026",
+  "wasAttributedTo": "https://orcid.org/0000-0000-0000-0001"
+}

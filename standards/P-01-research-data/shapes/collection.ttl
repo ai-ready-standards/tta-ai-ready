@@ -1,0 +1,98 @@
+# Collection SHACL shapes — TTAK.KO-10.0976 §6.2 (C1~C12)
+
+@prefix sh:        <http://www.w3.org/ns/shacl#> .
+@prefix dcat:      <http://www.w3.org/ns/dcat#> .
+@prefix dct:       <http://purl.org/dc/terms/> .
+@prefix tta:       <https://standards.tta.or.kr/ai-ready/research-data/v1#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+
+tta:CollectionShape
+    a sh:NodeShape ;
+    sh:targetClass dcat:Catalog ;
+    rdfs:label "TTAK.KO-10.0976 Collection Shape (C1~C12)" ;
+
+    # C2 Identifier (M)
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[C2] Collection must have at least one dct:identifier" ;
+    ] ;
+
+    # C2.1 IdentifierType (M, CVP)
+    sh:property [
+        sh:path tta:identifierType ;
+        sh:minCount 1 ;
+        sh:in ( "ARK" "arXiv" "bibcode" "DOI" "EAN13" "EISSN" "Handle"
+                "ISBN" "ISSN" "ISTC" "LISSN" "LSID" "PMID" "PURL"
+                "UPC" "URL" "URN" "URI" "UCI" ) ;
+        sh:severity sh:Violation ;
+        sh:message "[C2.1] tta:identifierType is mandatory and must be from IdentifierType vocabulary" ;
+    ] ;
+
+    # C3 Title (M)
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "[C3] Collection must have at least one dct:title" ;
+    ] ;
+
+    # C4 Date (R)
+    sh:property [
+        sh:path dct:date ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date ;
+        sh:severity sh:Warning ;
+        sh:message "[C4] Collection is recommended to have dct:date (xsd:date)" ;
+    ] ;
+
+    # C4.1 DateType (M when C4 present)
+    sh:property [
+        sh:path tta:dateType ;
+        sh:in ( "Created" "Updated" "Deleted" ) ;
+        sh:severity sh:Warning ;
+        sh:message "[C4.1] tta:dateType (when date present) must be from CollectionDateType: Created, Updated, Deleted" ;
+    ] ;
+
+    # C5 Description (R)
+    sh:property [
+        sh:path dct:description ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "[C5] Collection is recommended to have dct:description" ;
+    ] ;
+
+    # C7 Creator (R)
+    sh:property [
+        sh:path dct:creator ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "[C7] Collection is recommended to have dct:creator" ;
+    ] ;
+
+    # C9 Rights (R)
+    sh:property [
+        sh:path dct:rights ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "[C9] Collection is recommended to have dct:rights" ;
+    ] ;
+
+    # C11 AccessType (O)
+    sh:property [
+        sh:path tta:accessType ;
+        sh:in ( "open" "embargoed" "restricted" "closed" ) ;
+        sh:severity sh:Info ;
+        sh:message "[C11] tta:accessType (if present) must be from CollectionAccessType vocabulary" ;
+    ] ;
+
+    # C12 AccessRestriction (O)
+    sh:property [
+        sh:path tta:accessRestriction ;
+        sh:in ( "feeRequired" "registration" "institutional membership"
+                "non-registration" "free" "other" ) ;
+        sh:severity sh:Info ;
+        sh:message "[C12] tta:accessRestriction (if present) must be from CollectionAccessRestrictionType vocabulary" ;
+    ] .
