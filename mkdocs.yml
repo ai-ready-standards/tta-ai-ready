@@ -1,0 +1,103 @@
+site_name: TTA AI 레디 표준
+docs_dir: docs
+exclude_docs: |
+  /README.md
+site_description: 한국정보통신기술협회 AI 레디(AI-Ready) 표준 생태계 — 5종 시범 표준 카탈로그
+site_url: https://ai-ready-standards.github.io/tta-ai-ready/
+site_author: TTA AI-Ready Standards Project
+copyright: Copyright &copy; 2026 TTA · 본 사이트는 사업 진행 단계의 결과물이며 정식 표준은 TTA 발간물을 따른다.
+
+repo_name: ai-ready-standards/tta-ai-ready
+repo_url: https://github.com/ai-ready-standards/tta-ai-ready
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로 전환
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로 전환
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ai-ready-standards/tta-ai-ready
+
+extra_css:
+  - assets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+nav:
+  - 홈: index.md
+  - 표준 카탈로그:
+      - 5종 시범 표준: standards/index.md
+      - P-01 연구데이터: standards/p-01.md
+      - P-02 공공데이터: standards/p-02.md
+      - P-03 태깅·라벨링: standards/p-03.md
+      - P-04 농업 AI: standards/p-04.md
+      - P-05 철강 제조: standards/p-05.md
+  - 스키마 레퍼런스:
+      - 개요: reference/index.md
+      - Collection (C1~C12): reference/collection.md
+      - Dataset (D1~D15): reference/dataset.md
+      - File (F1~F19): reference/file.md
+      - Repository (R1~R21): reference/repository.md
+      - 통제어 14종: reference/vocabularies.md
+  - 시작하기: getting-started.md
+  - 검증해보기: validate.md
+  - 사업 문서:
+      - 프레임워크: framework/index.md
+      - 매뉴얼: manuals/index.md
+      - 리포지토리: repository/index.md
