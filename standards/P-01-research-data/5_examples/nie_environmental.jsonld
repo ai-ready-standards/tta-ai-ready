@@ -1,0 +1,139 @@
+{
+  "@context": "https://standard.tta.or.kr/ai-ready/profile/context.jsonld",
+  "@type": "Dataset",
+  "@id": "https://nie.re.kr/dataset/biodiversity-2025",
+
+  "DatasetIdentifier": "10.5072/NIE-BIO-2025-001",
+  "DatasetIdentifierType": "DOI",
+
+  "DatasetTitle": {
+    "ko": "한반도 생물다양성 모니터링 데이터셋 2025",
+    "en": "Korean Peninsula Biodiversity Monitoring Dataset 2025"
+  },
+  "DatasetTitleType": "Other",
+
+  "DatasetCreator": [
+    {
+      "@type": "schema:Person",
+      "schema:name": "이진솔",
+      "schema:affiliation": {
+        "@type": "schema:Organization",
+        "schema:legalName": "국립생태원",
+        "schema:identifier": "ROR:00000kis"
+      },
+      "schema:identifier": {"@id": "https://orcid.org/0000-0001-2345-6789"}
+    }
+  ],
+
+  "DatasetPublisher": [{
+    "@type": "schema:Organization",
+    "schema:legalName": "국립생태원",
+    "schema:url": "https://nie.re.kr"
+  }],
+
+  "PublicationYear": "2025",
+
+  "DatasetDate": "2025-12-31",
+  "DatasetDateType": "Issued",
+
+  "DatasetDescription": {
+    "ko": "2025년 한반도 전역에서 수집된 생물다양성 모니터링 데이터입니다. 식물상, 동물상, 곤충상의 분포·개체수·생태 정보를 포함합니다.",
+    "en": "Biodiversity monitoring data collected across the Korean Peninsula in 2025, including distribution, abundance, and ecological information for flora, fauna, and insects."
+  },
+
+  "DatasetSubject": [
+    {
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Biodiversity",
+      "skos:inScheme": {"@id": "DFG"},
+      "skos:notation": "20801"
+    },
+    {
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Ecology",
+      "skos:inScheme": {"@id": "DFG"},
+      "skos:notation": "20805"
+    }
+  ],
+
+  "DatasetContributor": [
+    {
+      "@type": "schema:Organization",
+      "schema:legalName": "환경부"
+    }
+  ],
+  "DatasetContributorType": "Funder",
+
+  "DatasetContact": {
+    "@type": "vcard:Kind",
+    "vcard:fn": "이진솔 박사",
+    "vcard:hasEmail": {"@id": "mailto:eljinsol@nie.re.kr"},
+    "vcard:hasTelephone": "+82-41-950-5800"
+  },
+
+  "DatasetRights": "본 데이터셋은 국립생태원의 저작권 하에 공개됩니다. CC BY-NC 4.0 라이선스 적용.",
+  "DatasetKeyword": "biodiversity, ecology, monitoring, Korean Peninsula, NIE",
+  "DatasetAccessType": "open",
+  "DatasetAccessRestriction": "free",
+
+  "//": "Dataset → File 관계",
+  "dcat:distribution": [
+    {
+      "@type": "File",
+      "@id": "https://nie.re.kr/dataset/biodiversity-2025/files/main.csv",
+      "FileIdentifier": "10.5072/NIE-BIO-2025-001/files/main.csv",
+      "FileIdentifierType": "DOI",
+      "FileTitle": {
+        "ko": "생물다양성 메인 데이터 (CSV)",
+        "en": "Biodiversity Main Data (CSV)"
+      },
+      "FileCreator": "이진솔",
+      "FilePublisher": "국립생태원",
+      "FilePublicationYear": "2025",
+      "FileContributorType": "DataCollector",
+      "FileDate": "2025-12-31",
+      "FileDateType": "Created",
+      "FileDescription": {
+        "ko": "한반도 전역 시군구별 생물다양성 측정값 (CSV 형식, 약 1.2GB)"
+      },
+      "FileSubject": [
+        {
+          "@type": "skos:Concept",
+          "skos:prefLabel": "Biodiversity Measurement"
+        }
+      ],
+      "FileRights": "비상업적 연구 목적 재사용 허용 (CC BY-NC 4.0)",
+      "FileAccessType": "opened",
+      "FileAccessRestriction": "free",
+
+      "//": "★ Decision-3.1: Coverage dual-purpose — 공간 형식 사용",
+      "FileCoverage": "한반도 전역 (북위 33°-43°, 동경 124°-132°)",
+
+      "FileType": {"@id": "dctype:Dataset"},
+      "FileFormat": "text/csv",
+      "FileSize": 1288490188,
+      "FileUnit": "B"
+    },
+    {
+      "@type": "File",
+      "@id": "https://nie.re.kr/dataset/biodiversity-2025/files/metadata.json",
+      "FileIdentifier": "10.5072/NIE-BIO-2025-001/files/metadata.json",
+      "FileIdentifierType": "DOI",
+      "FileTitle": {
+        "ko": "메타데이터 파일 (JSON)"
+      },
+      "FileCreator": "이진솔",
+      "FilePublisher": "국립생태원",
+      "FilePublicationYear": "2025",
+      "FileContributorType": "DataCurator",
+      "FileDate": "2025-12-31",
+      "FileDateType": "Created",
+      "FileType": {"@id": "dctype:Text"},
+      "FileFormat": "application/json",
+      "FileSize": 245760,
+      "FileUnit": "B",
+      "//": "★ Decision-3.1: Coverage dual-purpose — 시간 형식 사용",
+      "FileCoverage": "2025-01-01T00:00:00+09:00 to 2025-12-31T23:59:59+09:00"
+    }
+  ]
+}

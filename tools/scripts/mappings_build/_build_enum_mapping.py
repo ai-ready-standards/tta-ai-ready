@@ -1,0 +1,177 @@
+"""Build tta-0976_enumerations_mapping.csv (117 rows × 8 cols)
+Step 4 of Phase B mapping work.
+"""
+import csv
+
+HEADER = ['tta_cv_id','tta_cv_value','tta_cv_category','global_mapping_1','global_mapping_2','mapping_priority','semantic_diff','notes']
+
+# CV-001 to CV-060 (first batch for mid-report at row 60)
+batch1 = [
+    # CollectionAccessRestrictionType (CV-001 to CV-006) — re3data source
+    ['TTA-0976-CV-001','feeRequired','CollectionAccessRestrictionType','re3data-cv:feeRequired','dcterms-cv:accessRights:feeRequired','primary','(none)','TTA cites re3data dataAccessRestriction. Used by Collection/Dataset/File AccessRestriction'],
+    ['TTA-0976-CV-002','registration','CollectionAccessRestrictionType','re3data-cv:registration','','primary','(none)','TTA cites re3data dataAccessRestriction'],
+    ['TTA-0976-CV-003','institutional membership','CollectionAccessRestrictionType','re3data-cv:institutional_membership','','primary','(none)','TTA cites re3data dataAccessRestriction. Note value contains space'],
+    ['TTA-0976-CV-004','non-registration','CollectionAccessRestrictionType','re3data-cv:non-registration','','primary','(none)','TTA cites re3data dataAccessRestriction'],
+    ['TTA-0976-CV-005','free','CollectionAccessRestrictionType','re3data-cv:free','dcterms-cv:accessRights:free','primary','(none)','TTA cites re3data dataAccessRestriction. dcat:Distribution dcterms:accessRights also uses similar values'],
+    ['TTA-0976-CV-006','other','CollectionAccessRestrictionType','re3data-cv:other','','primary','(none)','TTA cites re3data dataAccessRestriction. Generic catchall'],
+    # CollectionAccessType (CV-007 to CV-010)
+    ['TTA-0976-CV-007','open','CollectionAccessType','dcat-cv:open','re3data-cv:dataAccessType:open','primary','(none)','dcat conventional value (no formal vocab) + re3data direct cite. TTA-AP 권장: dcterms:accessRights value "open"'],
+    ['TTA-0976-CV-008','embargoed','CollectionAccessType','dcat-cv:embargoed','re3data-cv:dataAccessType:embargoed','primary','(none)','Embargo period semantics — DataCite uses Embargoed dateType too'],
+    ['TTA-0976-CV-009','restricted','CollectionAccessType','dcat-cv:restricted','re3data-cv:dataAccessType:restricted','primary','(none)','dcat-AP convention'],
+    ['TTA-0976-CV-010','closed','CollectionAccessType','dcat-cv:closed','re3data-cv:dataAccessType:closed','primary','(none)','dcat-AP convention'],
+    # CollectionDateType (CV-011 to CV-013) — partial of DataCite
+    ['TTA-0976-CV-011','Created','CollectionDateType','datacite-cv:Created','prov:generatedAtTime (semantic equivalent)','primary','(none)','Same string value as datacite-cv:Created (CV-044). Phase C: trigger c5 prov:generatedAtTime when used in Date property'],
+    ['TTA-0976-CV-012','Updated','CollectionDateType','datacite-cv:Updated','prov:wasRevisionOf (semantic equivalent)','primary','(none)','Same string value as datacite-cv:Updated (CV-047). Phase C: trigger c5 prov:wasRevisionOf'],
+    ['TTA-0976-CV-013','Deleted','CollectionDateType','schema:dateDeleted (closest)','prov:invalidatedAtTime (semantic equivalent)','secondary','TTA "Deleted" not in DataCite DateType. schema:dateDeleted (DataFeedItem) is closest','TTA Collection-only. DataCite has Withdrawn but with different semantics. Phase C: trigger c5 prov:invalidatedAtTime'],
+    # SubjectScheme (CV-014) — open vocab
+    ['TTA-0976-CV-014','DFG','SubjectScheme','(external) DFG classification','','primary','Open vocabulary — TTA only lists DFG as example','SubjectScheme is open vocabulary. DFG is just one example. Other schemes (LCSH/MeSH/AAT/etc.) also valid. Phase C: skos:ConceptScheme reference'],
+    # ContributorType (CV-015 to CV-036) — DataCite direct
+    ['TTA-0976-CV-015','ContactPerson','ContributorType','datacite-cv:ContactPerson','schema:contactPoint (loose)','primary','(none)','TTA cites DataCite contributorType. 22 values 1:1 mapping'],
+    ['TTA-0976-CV-016','DataCollector','ContributorType','datacite-cv:DataCollector','prov:Collect (PROV-DC ext, loose)','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-017','DataCurator','ContributorType','datacite-cv:DataCurator','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-018','DataManager','ContributorType','datacite-cv:DataManager','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-019','Distributor','ContributorType','datacite-cv:Distributor','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-020','Editor','ContributorType','datacite-cv:Editor','schema:editor','primary','(none)','DataCite direct + Schema.org has schema:editor property'],
+    ['TTA-0976-CV-021','Funder','ContributorType','datacite-cv:Funder','schema:funder','primary','(none)','DataCite direct + Schema.org schema:funder property exists'],
+    ['TTA-0976-CV-022','HostingInstitution','ContributorType','datacite-cv:HostingInstitution','schema:provider (loose)','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-023','Producer','ContributorType','datacite-cv:Producer','schema:producer','primary','(none)','DataCite direct + Schema.org schema:producer property'],
+    ['TTA-0976-CV-024','ProjectLeader','ContributorType','datacite-cv:ProjectLeader','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-025','ProjectManager','ContributorType','datacite-cv:ProjectManager','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-026','ProjectMember','ContributorType','datacite-cv:ProjectMember','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-027','RegistrationAgency','ContributorType','datacite-cv:RegistrationAgency','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-028','RegistrationAuthority','ContributorType','datacite-cv:RegistrationAuthority','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-029','RelatedPerson','ContributorType','datacite-cv:RelatedPerson','','primary','(none)','DataCite direct. Generic person without specific role'],
+    ['TTA-0976-CV-030','Researcher','ContributorType','datacite-cv:Researcher','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-031','ResearchGroup','ContributorType','datacite-cv:ResearchGroup','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-032','RightsHolder','ContributorType','datacite-cv:RightsHolder','prov:RightsHolder (PROV-DC) + dcterms:rightsHolder','primary','(none)','DataCite direct + 3 standards align (datacite/prov/dcterms)'],
+    ['TTA-0976-CV-033','Sponsor','ContributorType','datacite-cv:Sponsor','schema:sponsor (loose)','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-034','Supervisor','ContributorType','datacite-cv:Supervisor','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-035','WorkPackageLeader','ContributorType','datacite-cv:WorkPackageLeader','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-036','Other (ContributorType)','ContributorType','datacite-cv:Other','','primary','(none)','DataCite direct. Catchall'],
+    # DatabaseAccessType (CV-037 to CV-039)
+    ['TTA-0976-CV-037','open (DatabaseAccessType)','DatabaseAccessType','re3data-cv:databaseAccessType:open','dcat-cv:open','primary','(none)','TTA cites re3data databaseAccessType. Same value semantics as CollectionAccessType:open'],
+    ['TTA-0976-CV-038','restricted (DatabaseAccessType)','DatabaseAccessType','re3data-cv:databaseAccessType:restricted','dcat-cv:restricted','primary','(none)','TTA cites re3data'],
+    ['TTA-0976-CV-039','closed (DatabaseAccessType)','DatabaseAccessType','re3data-cv:databaseAccessType:closed','dcat-cv:closed','primary','(none)','TTA cites re3data'],
+    # DatasetDateType (CV-040 to CV-048) — DataCite direct
+    ['TTA-0976-CV-040','Accepted','DatasetDateType','datacite-cv:Accepted','','primary','(none)','TTA cites DataCite dateType. 9 values 1:1 mapping'],
+    ['TTA-0976-CV-041','Available','DatasetDateType','datacite-cv:Available','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-042','Copyrighted','DatasetDateType','datacite-cv:Copyrighted','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-043','Collected','DatasetDateType','datacite-cv:Collected','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-044','Created (DatasetDateType)','DatasetDateType','datacite-cv:Created','prov:generatedAtTime (semantic, when used in Date)','primary','(none)','DataCite direct. Phase C: trigger c5 prov:generatedAtTime in matrix row TTA-0976-209/311'],
+    ['TTA-0976-CV-045','Issued','DatasetDateType','datacite-cv:Issued','dcterms:issued','primary','(none)','DataCite direct + dcterms:issued semantic equivalence'],
+    ['TTA-0976-CV-046','Submitted','DatasetDateType','datacite-cv:Submitted','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-047','Updated (DatasetDateType)','DatasetDateType','datacite-cv:Updated','dcterms:modified + prov:wasRevisionOf','primary','(none)','DataCite direct + dcterms/prov 매핑'],
+    ['TTA-0976-CV-048','Valid','DatasetDateType','datacite-cv:Valid','','primary','(none)','DataCite direct'],
+    # DataUploadType (CV-049 to CV-051)
+    ['TTA-0976-CV-049','open (DataUploadType)','DataUploadType','re3data-cv:dataUploadType:open','','primary','(none)','TTA cites re3data dataUploadType. No DCMI/Schema/DCAT equivalent (Repository submission policy concept)'],
+    ['TTA-0976-CV-050','restricted (DataUploadType)','DataUploadType','re3data-cv:dataUploadType:restricted','','primary','(none)','TTA cites re3data'],
+    ['TTA-0976-CV-051','closed (DataUploadType)','DataUploadType','re3data-cv:dataUploadType:closed','','primary','(none)','TTA cites re3data'],
+    # EnhancedPublication (CV-052 to CV-054) — yes/no/unknown boolean+
+    ['TTA-0976-CV-052','yes (EnhancedPublication)','EnhancedPublication','re3data-cv:enhancedPublication:yes','xsd:boolean=true','primary','(none)','TTA cites re3data. Boolean equivalent: true'],
+    ['TTA-0976-CV-053','no (EnhancedPublication)','EnhancedPublication','re3data-cv:enhancedPublication:no','xsd:boolean=false','primary','(none)','TTA cites re3data. Boolean equivalent: false'],
+    ['TTA-0976-CV-054','unknown (EnhancedPublication)','EnhancedPublication','re3data-cv:enhancedPublication:unknown','xsd:string="unknown"','secondary','xsd:boolean cannot represent unknown — needs nullable or 3-valued logic','TTA cites re3data. unknown requires non-boolean representation'],
+    # FileSizeUnitType (CV-055 to CV-058) — schema:unitText
+    ['TTA-0976-CV-055','Byte','FileSizeUnitType','schema:unitText="B"','qudt:Byte','primary','(none)','UN/CEFACT Common Code: B = byte. dcat:byteSize uses bytes only — Phase C: 정규화 권장'],
+    ['TTA-0976-CV-056','Mega Byte','FileSizeUnitType','schema:unitText="MB"','qudt:Megabyte','primary','TTA "Mega Byte" (with space) vs unit code "MB" (no space) — 정규화 필요','UN/CEFACT: MB. ISO/IEC 80000-13: MiB (binary, 1024^2) vs MB (decimal, 10^6) — 모호성 주의'],
+    ['TTA-0976-CV-057','Giga Byte','FileSizeUnitType','schema:unitText="GB"','qudt:Gigabyte','primary','TTA "Giga Byte" vs "GB" 정규화 필요','UN/CEFACT: GB'],
+    ['TTA-0976-CV-058','Tera Byte','FileSizeUnitType','schema:unitText="TB"','qudt:Terabyte','primary','TTA "Tera Byte" vs "TB" 정규화 필요','UN/CEFACT: TB'],
+    # FileType (CV-059 to CV-060 — first 2 of 11)
+    ['TTA-0976-CV-059','Event','FileType','dctype:Event','schema:Event','primary','(none)','TTA cites DCMI Type Vocabulary directly. 11 values 1:1 to dctype'],
+    ['TTA-0976-CV-060','Image','FileType','dctype:Image','schema:ImageObject','primary','(none)','DCMI Type Vocabulary direct'],
+]
+
+# CV-061 to CV-117 (rest)
+batch2 = [
+    # FileType continued (CV-061 to CV-069)
+    ['TTA-0976-CV-061','InteractiveResource','FileType','dctype:InteractiveResource','','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-062','MovingImage','FileType','dctype:MovingImage','schema:VideoObject','primary','(none)','DCMI Type Vocabulary direct (sub-class of dctype:Image)'],
+    ['TTA-0976-CV-063','PhysicalObject','FileType','dctype:PhysicalObject','','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-064','Service','FileType','dctype:Service','dcat:DataService','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-065','Software','FileType','dctype:Software','schema:SoftwareApplication','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-066','Sound','FileType','dctype:Sound','schema:AudioObject','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-067','StillImage','FileType','dctype:StillImage','schema:ImageObject','primary','(none)','DCMI Type Vocabulary direct (sub-class of dctype:Image)'],
+    ['TTA-0976-CV-068','Text','FileType','dctype:Text','','primary','(none)','DCMI Type Vocabulary direct'],
+    ['TTA-0976-CV-069','other (FileType)','FileType','(none)','','none','TTA-specific: DCMI Type Vocabulary does NOT include "other"','TTA-only addition. PG606 피드백 가능: DCMI Type 11개 값 외 catchall 필요성 검토'],
+    # IdentifierType (CV-070 to CV-088) — DataCite + UCI
+    ['TTA-0976-CV-070','ARK','IdentifierType','datacite-cv:relatedIdentifierType:ARK','','primary','(none)','TTA cites DataCite relatedIdentifierType. 19 values mostly 1:1'],
+    ['TTA-0976-CV-071','arXiv','IdentifierType','datacite-cv:relatedIdentifierType:arXiv','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-072','bibcode','IdentifierType','datacite-cv:relatedIdentifierType:bibcode','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-073','DOI','IdentifierType','datacite-cv:relatedIdentifierType:DOI','schema:identifier (typed)','primary','(none)','DataCite direct. 가장 흔한 ID 유형'],
+    ['TTA-0976-CV-074','EAN13','IdentifierType','datacite-cv:relatedIdentifierType:EAN13','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-075','EISSN','IdentifierType','datacite-cv:relatedIdentifierType:EISSN','schema:issn (electronic)','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-076','Handle','IdentifierType','datacite-cv:relatedIdentifierType:Handle','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-077','ISBN','IdentifierType','datacite-cv:relatedIdentifierType:ISBN','schema:isbn','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-078','ISSN','IdentifierType','datacite-cv:relatedIdentifierType:ISSN','schema:issn','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-079','ISTC','IdentifierType','datacite-cv:relatedIdentifierType:ISTC','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-080','LISSN','IdentifierType','datacite-cv:relatedIdentifierType:LISSN','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-081','LSID','IdentifierType','datacite-cv:relatedIdentifierType:LSID','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-082','PMID','IdentifierType','datacite-cv:relatedIdentifierType:PMID','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-083','PURL','IdentifierType','datacite-cv:relatedIdentifierType:PURL','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-084','UPC','IdentifierType','datacite-cv:relatedIdentifierType:UPC','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-085','URL','IdentifierType','datacite-cv:relatedIdentifierType:URL','schema:URL','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-086','URN','IdentifierType','datacite-cv:relatedIdentifierType:URN','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-087','URI','IdentifierType','datacite-cv:relatedIdentifierType:URI','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-088','UCI','IdentifierType','(none)','','none','TTA-specific (한국 표준): DataCite에 UCI 없음','한국 국가표준 디지털콘텐츠식별체계. PG606 피드백: DataCite에 추가 제안 가능'],
+    # InstitutionCountry / Language — open vocabs
+    ['TTA-0976-CV-089','(open vocabulary - InstitutionCountry)','InstitutionCountry','(external) ISO 3166-1 alpha-2 codes','schema:addressCountry','primary','[OVERRIDE 적용] alpha-2 (KR, US, DE, JP) — 표준 원문은 alpha-3 (KOR/USA/DEU/JPN)','Open vocabulary — 외부 ISO 표준 직접 참조 (INV-6304). 변환 함수 필요 (KOR↔KR)'],
+    ['TTA-0976-CV-090','(open vocabulary - Language)','Language','(external) ISO 639-3 codes','dcterms:language','primary','TTA uses alpha-3 (kor/eng/deu) — DCAT v3 prefers BCP 47 (ko/en/de)','Open vocabulary — 외부 ISO 표준 직접 참조 (INV-6303). PG606 피드백: BCP 47 통일 권고'],
+    # QualityManagement (CV-091 to CV-093)
+    ['TTA-0976-CV-091','yes (QualityManagement)','QualityManagement','re3data-cv:qualityManagement:yes','xsd:boolean=true (★ Boolean Activation Slot trigger for DQV)','primary','(none)','★ Decision-Q4 적용: yes일 때 c6 DQV 슬롯 활성. dqv:hasQualityMetadata 활성화'],
+    ['TTA-0976-CV-092','no (QualityManagement)','QualityManagement','re3data-cv:qualityManagement:no','xsd:boolean=false','primary','(none)','c6 DQV 슬롯 비활성'],
+    ['TTA-0976-CV-093','unknown (QualityManagement)','QualityManagement','re3data-cv:qualityManagement:unknown','xsd:string="unknown"','secondary','xsd:boolean cannot represent unknown','c6 DQV 슬롯 비활성 (불명)'],
+    # RepositoryType (CV-094 to CV-099)
+    ['TTA-0976-CV-094','disciplinary','RepositoryType','re3data-cv:type:disciplinary','','primary','(none)','TTA cites re3data type. No DCMI/Schema/DCAT equivalent'],
+    ['TTA-0976-CV-095','governmental','RepositoryType','re3data-cv:type:governmental','','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-096','institutional','RepositoryType','re3data-cv:type:institutional','','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-097','multidisciplinary','RepositoryType','re3data-cv:type:multidisciplinary','','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-098','project-related','RepositoryType','re3data-cv:type:project-related','','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-099','other (RepositoryType)','RepositoryType','re3data-cv:type:other','','primary','(none)','re3data direct'],
+    # ResponsibilityType (CV-100 to CV-105) — re3data + prov:hadRole loose
+    ['TTA-0976-CV-100','funding','ResponsibilityType','re3data-cv:responsibilityType:funding','prov:Role (loose) → schema:funder','primary','(none)','TTA cites re3data responsibilityType. Decision-Q7 PROV mapping'],
+    ['TTA-0976-CV-101','general','ResponsibilityType','re3data-cv:responsibilityType:general','prov:Role (loose)','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-102','main','ResponsibilityType','re3data-cv:responsibilityType:main','prov:Role (loose)','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-103','sponsoring','ResponsibilityType','re3data-cv:responsibilityType:sponsoring','prov:Role (loose) → schema:sponsor','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-104','technical','ResponsibilityType','re3data-cv:responsibilityType:technical','prov:Role (loose)','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-105','other (ResponsibilityType)','ResponsibilityType','re3data-cv:responsibilityType:other','','primary','(none)','re3data direct'],
+    # TitleType (CV-106 to CV-109) — DataCite direct
+    ['TTA-0976-CV-106','AlternativeTitle','TitleType','datacite-cv:titleType:AlternativeTitle','dcterms:alternative','primary','(none)','TTA cites DataCite titleType. dcterms:alternative is closely related'],
+    ['TTA-0976-CV-107','Subtitle','TitleType','datacite-cv:titleType:Subtitle','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-108','TranslatedTitle','TitleType','datacite-cv:titleType:TranslatedTitle','','primary','(none)','DataCite direct'],
+    ['TTA-0976-CV-109','other (TitleType)','TitleType','datacite-cv:titleType:Other','','primary','(none)','DataCite direct (Other case)'],
+    # Versioning (CV-110 to CV-112)
+    ['TTA-0976-CV-110','yes (Versioning)','Versioning','re3data-cv:versioning:yes','xsd:boolean=true','primary','(none)','TTA cites re3data versioning. Boolean equivalent'],
+    ['TTA-0976-CV-111','no (Versioning)','Versioning','re3data-cv:versioning:no','xsd:boolean=false','primary','(none)','re3data direct'],
+    ['TTA-0976-CV-112','unknown (Versioning)','Versioning','re3data-cv:versioning:unknown','xsd:string="unknown"','secondary','xsd:boolean cannot represent unknown','re3data direct'],
+    # Aliases (CV-113 to CV-117) — point to source category
+    ['TTA-0976-CV-113','(alias) DatasetAccessType -> CollectionAccessType','DatasetAccessType','(alias of CollectionAccessType — see CV-007 to CV-010)','','primary','(none)','Alias entry. Real values mapped at CV-007/008/009/010 (open/embargoed/restricted/closed)'],
+    ['TTA-0976-CV-114','(alias) DatasetAccessRestrictionType -> CollectionAccessRestrictionType','DatasetAccessRestrictionType','(alias of CollectionAccessRestrictionType — see CV-001 to CV-006)','','primary','(none)','Alias entry. Real values mapped at CV-001~006'],
+    ['TTA-0976-CV-115','(alias) FileAccessType -> CollectionAccessType','FileAccessType','(alias of CollectionAccessType — see CV-007 to CV-010)','','primary','(none)','Alias entry'],
+    ['TTA-0976-CV-116','(alias) FileAccessRestrictionType -> CollectionAccessRestrictionType','FileAccessRestrictionType','(alias of CollectionAccessRestrictionType — see CV-001 to CV-006)','','primary','(none)','Alias entry'],
+    ['TTA-0976-CV-117','(alias) FileDateType -> DatasetDateType','FileDateType','(alias of DatasetDateType — see CV-040 to CV-048)','','primary','(none)','Alias entry. Real values mapped at CV-040~048'],
+]
+
+with open(r'D:\ARD\mappings\tta-0976_enumerations_mapping.csv', 'w', encoding='utf-8', newline='') as f:
+    w = csv.writer(f)
+    w.writerow(HEADER)
+    for r in batch1:
+        w.writerow(r)
+    for r in batch2:
+        w.writerow(r)
+
+# Verify
+with open(r'D:\ARD\mappings\tta-0976_enumerations_mapping.csv', encoding='utf-8') as f:
+    rows = list(csv.reader(f))
+print(f"Total: {len(rows)-1} (target: 117)")
+print(f"Header cols: {len(rows[0])}")
+bad = [(i,len(r)) for i,r in enumerate(rows[1:],2) if len(r) != len(rows[0])]
+print(f"Bad rows: {len(bad)}")
+if bad:
+    for i,c in bad[:5]: print(f"  Line {i}: {c} cols")
+
+from collections import Counter
+print()
+print("priority distribution:")
+for k,v in Counter(r[5] for r in rows[1:]).most_common(): print(f"  {k}: {v}")
+print()
+print("category distribution:")
+for k,v in Counter(r[2] for r in rows[1:]).most_common(): print(f"  {k}: {v}")

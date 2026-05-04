@@ -79,13 +79,13 @@
         {
           "@type": "Distribution",
           "title": {"en": "JSON-LD Context"},
-          "downloadURL": "https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/schema/context.jsonld",
+          "downloadURL": "https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/2_schema/context.jsonld",
           "mediaType": "application/ld+json"
         },
         {
           "@type": "Distribution",
           "title": {"en": "SHACL Shapes"},
-          "accessURL": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-01-research-data/shapes",
+          "accessURL": "https://github.com/ai-ready-standards/tta-ai-ready/tree/main/standards/P-01-research-data/2_schema",
           "mediaType": "text/turtle"
         }
       ]

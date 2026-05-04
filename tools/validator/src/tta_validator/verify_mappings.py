@@ -190,11 +190,14 @@ def _extract_from_turtle(file_path: Path) -> tuple[dict[str, str], list[IRIUsage
 
 def discover_files(repo_root: Path) -> tuple[list[Path], list[Path]]:
     """검증 대상 파일들을 찾아 (jsonld, turtle) 튜플로 반환."""
-    jsonld = sorted(repo_root.glob("standards/*/schema/context.jsonld"))
+    # ARD AP 구조 (2_schema/) + 1차 골격 (schema/) 모두 지원
+    jsonld = sorted(repo_root.glob("standards/*/2_schema/context.jsonld"))
+    jsonld += sorted(repo_root.glob("standards/*/schema/context.jsonld"))
     catalog = repo_root / "catalog.jsonld"
     if catalog.is_file():
         jsonld.append(catalog)
-    turtle = sorted(repo_root.glob("standards/*/shapes/*.ttl"))
+    turtle = sorted(repo_root.glob("standards/*/2_schema/*.ttl"))
+    turtle += sorted(repo_root.glob("standards/*/shapes/*.ttl"))
     return jsonld, turtle
 
 
@@ -222,20 +225,25 @@ def merge_usages(usages: list[IRIUsage]) -> list[IRIUsage]:
 
 
 def verify(repo_root: Path, cache_dir: Path | None = None) -> VerifyResult:
-    """전체 검증 실행."""
+    """전체 검증 실행.
+
+    매칭 전략: prefix 이름이 아닌 **namespace URI** 기준으로 매칭.
+    예: 'dct'와 'dcterms'는 같은 namespace를 가리키므로 둘 다 동일 어휘로 검증.
+    """
     if cache_dir is None:
         cache_dir = repo_root / "vocabularies" / "cached"
     specs = load_manifest(cache_dir)
-    spec_by_prefix = {s.prefix: s for s in specs}
+    # namespace URI를 키로 쓰는 맵 (prefix 이름 차이 흡수)
+    spec_by_namespace: dict[str, VocabSpec] = {s.namespace: s for s in specs}
 
     jsonld_files, turtle_files = discover_files(repo_root)
     raw_usages = collect_usages(jsonld_files, turtle_files)
     merged = merge_usages(raw_usages)
 
-    # 어휘별로 정의된 IRI 집합 미리 로드
-    subjects_by_prefix: dict[str, set[str]] = {}
-    for prefix, spec in spec_by_prefix.items():
-        subjects_by_prefix[prefix] = load_vocab_subjects(spec)
+    # namespace별로 정의된 IRI 집합 미리 로드
+    subjects_by_namespace: dict[str, set[str]] = {}
+    for ns, spec in spec_by_namespace.items():
+        subjects_by_namespace[ns] = load_vocab_subjects(spec)
 
     failed: list[IRIUsage] = []
     skipped_prefixes: set[str] = set()
@@ -244,10 +252,15 @@ def verify(repo_root: Path, cache_dir: Path | None = None) -> VerifyResult:
     for usage in merged:
         if usage.prefix in EXCLUDED_PREFIXES:
             continue
-        if usage.prefix not in spec_by_prefix:
+        # IRI에서 namespace 추출 (가장 긴 매칭)
+        matched_ns = None
+        for ns in spec_by_namespace:
+            if usage.iri.startswith(ns) and (matched_ns is None or len(ns) > len(matched_ns)):
+                matched_ns = ns
+        if matched_ns is None:
             skipped_prefixes.add(usage.prefix)
             continue
-        if usage.iri in subjects_by_prefix[usage.prefix]:
+        if usage.iri in subjects_by_namespace[matched_ns]:
             verified_count += 1
         else:
             failed.append(usage)

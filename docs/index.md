@@ -21,11 +21,11 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-flask:{ .lg .middle } **P-01 연구데이터**
+-   :material-flask:{ .lg .middle } **P-01 연구데이터** :material-check-circle:{ .lg }
 
     ---
 
-    TTAK.KO-10.0976 (2017) — 과학기술 연구데이터 메타데이터 4계층 구조
+    TTAK.KO-10.0976 (2017) — **AP 1.0.0 발행** · 자기 검증 통과
 
     [:octicons-arrow-right-24: 자세히](standards/p-01.md)
 

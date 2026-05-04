@@ -7,38 +7,62 @@ on:
     branches: [main]
 
 jobs:
-  validate:
-    name: AI 레디 패키지 자동 검증
+  vocab-verification:
+    name: 국제 어휘 매핑 100% 검증
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          # cache: pip — pyproject.toml / requirements.txt 추가 후 활성화
-
       - name: Install validator
         run: |
           python -m pip install --upgrade pip
-          pip install -e tools/validator/
+          pip install -e tools/validator/[dev]
+      - name: Validator unit tests
+        run: pytest tools/validator/tests/ -v
+      - name: Verify mappings (E2E)
+        run: tta-verify-mappings
 
-      - name: 1. 유효 예시 검증 (M 위반 0건이어야 함)
+  pydantic-tests:
+    name: Pydantic 모델 테스트 (P-01)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
         run: |
-          tta-validator \
-            standards/P-01-research-data/examples/valid/ \
-            --shapes-dir standards/P-01-research-data/shapes \
-            --ci
+          python -m pip install --upgrade pip
+          pip install pydantic pytest pytest-cov
+      - name: Run tests
+        working-directory: standards/P-01-research-data/3_code
+        run: |
+          PYTHONPATH=. pytest tests/ -v --cov=tta_0976 --cov-report=term
 
-      - name: 2. 음성 테스트 (의도된 M 위반 발생해야 함)
+  shacl-validation:
+    name: SHACL 인스턴스 검증 (P-01 examples)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
         run: |
-          tta-validator \
-            standards/P-01-research-data/examples/invalid/ \
-            --shapes-dir standards/P-01-research-data/shapes \
-            --expect-fail
+          python -m pip install --upgrade pip
+          pip install pyshacl rdflib pyld pydantic
+      - name: sh:or pre-test
+        working-directory: standards/P-01-research-data
+        run: python 4_validator/test_sh_or.py
+      - name: Validate 3 examples
+        working-directory: standards/P-01-research-data
+        run: |
+          for f in 5_examples/*.jsonld; do
+            echo "=== Validating $f ==="
+            python 4_validator/validate.py "$f"
+          done
 
   lint:
     name: 코드 린트
@@ -48,7 +72,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install linters
+      - name: Install ruff
         run: pip install ruff
       - name: Ruff
-        run: ruff check tools/ || echo "(린트 경고 — 후속 PR에서 정리)"
+        run: ruff check tools/ standards/P-01-research-data/3_code/ standards/P-01-research-data/4_validator/ || echo "(린트 경고 — 후속 PR에서 정리)"
