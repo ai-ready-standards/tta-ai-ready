@@ -1,0 +1,102 @@
+{
+  "_comment": "12종 국제 표준 어휘 캐시 메니페스트. tta-verify-mappings가 이 메니페스트를 읽어 매핑 검증을 수행한다. 갱신은 vocab-refresh.yml 워크플로우가 주 1회 자동 실행한다.",
+  "generated_at": "2026-05-04",
+  "vocabularies": [
+    {
+      "prefix": "dqv",
+      "file": "dqv.ttl",
+      "format": "turtle",
+      "namespace": "http://www.w3.org/ns/dqv#",
+      "source_url": "https://www.w3.org/TR/vocab-dqv/",
+      "version": "Data Quality Vocabulary (W3C Working Group Note 2016)"
+    },
+    {
+      "prefix": "dcat",
+      "file": "dcat.ttl",
+      "format": "turtle",
+      "namespace": "http://www.w3.org/ns/dcat#",
+      "source_url": "https://www.w3.org/ns/dcat3.ttl",
+      "version": "DCAT v3 (2024)"
+    },
+    {
+      "prefix": "dct",
+      "file": "dct.ttl",
+      "format": "turtle",
+      "namespace": "http://purl.org/dc/terms/",
+      "source_url": "https://www.dublincore.org/specifications/dublin-core/dcmi-terms/dublin_core_terms.ttl",
+      "version": "DCMI Terms 2020-01-20"
+    },
+    {
+      "prefix": "dcmitype",
+      "file": "dcmitype.ttl",
+      "format": "turtle",
+      "namespace": "http://purl.org/dc/dcmitype/",
+      "source_url": "http://purl.org/dc/dcmitype/",
+      "version": "DCMI Type Vocabulary"
+    },
+    {
+      "prefix": "prov",
+      "file": "prov.ttl",
+      "format": "turtle",
+      "namespace": "http://www.w3.org/ns/prov#",
+      "source_url": "http://www.w3.org/ns/prov-o",
+      "version": "PROV-O (W3C Recommendation 2013)"
+    },
+    {
+      "prefix": "sh",
+      "file": "sh.ttl",
+      "format": "turtle",
+      "namespace": "http://www.w3.org/ns/shacl#",
+      "source_url": "https://www.w3.org/ns/shacl.ttl",
+      "version": "SHACL (W3C Recommendation 2017)"
+    },
+    {
+      "prefix": "skos",
+      "file": "skos.rdf",
+      "format": "xml",
+      "namespace": "http://www.w3.org/2004/02/skos/core#",
+      "source_url": "https://www.w3.org/2009/08/skos-reference/skos.rdf",
+      "version": "SKOS (W3C Recommendation 2009)"
+    },
+    {
+      "prefix": "schema",
+      "file": "schema.ttl",
+      "format": "turtle",
+      "namespace": "https://schema.org/",
+      "source_url": "https://schema.org/version/latest/schemaorg-current-https.ttl",
+      "version": "Schema.org current"
+    },
+    {
+      "prefix": "duo",
+      "file": "duo.owl",
+      "format": "xml",
+      "namespace": "http://purl.obolibrary.org/obo/DUO_",
+      "source_url": "https://raw.githubusercontent.com/EBISPOT/DUO/master/src/ontology/duo.owl",
+      "version": "Data Use Ontology (master)"
+    },
+    {
+      "prefix": "cc",
+      "file": "cc.rdf",
+      "format": "xml",
+      "namespace": "http://creativecommons.org/ns#",
+      "source_url": "https://creativecommons.org/schema.rdf",
+      "version": "Creative Commons schema"
+    },
+    {
+      "prefix": "foaf",
+      "file": "foaf.rdf",
+      "format": "xml",
+      "namespace": "http://xmlns.com/foaf/0.1/",
+      "source_url": "http://xmlns.com/foaf/spec/index.rdf",
+      "version": "FOAF 0.1"
+    },
+    {
+      "prefix": "datacite",
+      "file": "datacite.ttl",
+      "format": "turtle",
+      "namespace": "http://purl.org/spar/datacite/",
+      "source_url": "https://sparontologies.github.io/datacite/current/datacite.ttl",
+      "version": "SPAR DataCite Ontology"
+    }
+  ]
+}
