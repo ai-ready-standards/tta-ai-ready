@@ -1,0 +1,680 @@
+# =============================================================================
+# TTAK.KO-10.0976 AI-Ready Application Profile — SHACL Shapes
+# Version: 1.0.0 (2026-05-04)
+# Conformance: SHACL Core (W3C Rec 2017-07-20)
+# Validation tool: pySHACL 0.25+
+# =============================================================================
+
+@prefix sh:        <http://www.w3.org/ns/shacl#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:       <http://www.w3.org/2002/07/owl#> .
+
+@prefix ttaap:     <https://standard.tta.or.kr/ai-ready/profile#> .
+@prefix tta0976:   <https://standard.tta.or.kr/0976#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix dctype:    <http://purl.org/dc/dcmitype/> .
+@prefix datacite:  <http://datacite.org/schema/kernel-4#> .
+@prefix re3data:   <https://www.re3data.org/schema#> .
+@prefix dcat:      <http://www.w3.org/ns/dcat#> .
+@prefix schema:    <https://schema.org/> .
+@prefix prov:      <http://www.w3.org/ns/prov#> .
+@prefix dqv:       <http://www.w3.org/ns/dqv#> .
+@prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+
+
+# =============================================================================
+# 통제어 SKOS ConceptScheme 정의 (sh:in 제약에서 참조)
+# =============================================================================
+
+# IdentifierType (CV-070~088, 19+1=20개 값. UCI 포함)
+ttaap:IdentifierTypeScheme a skos:ConceptScheme ;
+    rdfs:label "TTA-0976 Identifier Type" .
+
+# TitleType (CV-106~109)
+ttaap:TitleTypeScheme a skos:ConceptScheme .
+
+# DatasetDateType (CV-040~048, 9개)
+ttaap:DatasetDateTypeScheme a skos:ConceptScheme .
+
+# CollectionDateType (CV-011~013, 3개 값만 — DataCite 부분집합)
+ttaap:CollectionDateTypeScheme a skos:ConceptScheme .
+
+# ContributorType (CV-015~036, 22개 값)
+ttaap:ContributorTypeScheme a skos:ConceptScheme .
+
+# AccessType (CV-007~010, 4개 값)
+ttaap:AccessTypeScheme a skos:ConceptScheme .
+
+# AccessRestriction (CV-001~006, 6개 값)
+ttaap:AccessRestrictionScheme a skos:ConceptScheme .
+
+# RepositoryType (CV-094~099, 6개 값)
+ttaap:RepositoryTypeScheme a skos:ConceptScheme .
+
+# ResponsibilityType (CV-100~105, 6개 값)
+ttaap:ResponsibilityTypeScheme a skos:ConceptScheme .
+
+# FileType (CV-059~069, 11+1=12개 값. 'other' 포함)
+ttaap:FileTypeScheme a skos:ConceptScheme .
+
+# FileSizeUnitType (CV-055~058, 4개 값)
+ttaap:FileSizeUnitTypeScheme a skos:ConceptScheme .
+
+# Boolean+ (yes/no/unknown — Decision Issue-002)
+ttaap:BooleanPlusScheme a skos:ConceptScheme .
+
+
+# =============================================================================
+# RepositoryShape — TTA Repository 계층 (R1-R21)
+# =============================================================================
+
+ttaap:RepositoryShape a sh:NodeShape ;
+    sh:targetClass tta0976:Repository ;
+    rdfs:label "TTA-0976 Repository" ;
+    rdfs:comment "리포지터리 계층 — 연구데이터를 담고 있는 시스템·서비스 (R1-R21)" ;
+
+    # R2 RepositoryUrl (M)
+    sh:property [
+        sh:path dcat:landingPage ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:description "리포지터리 서비스 URL" ;
+    ] ;
+
+    # R3 Identifier (M)
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:description "레지스트리 등록 식별자" ;
+    ] ;
+
+    # R3.1 IdentifierType (M) — sh:in IdentifierType CV (20개)
+    sh:property [
+        sh:path datacite:identifierType ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "ARK"^^xsd:string "arXiv"^^xsd:string "bibcode"^^xsd:string "DOI"^^xsd:string "EAN13"^^xsd:string "EISSN"^^xsd:string "Handle"^^xsd:string "ISBN"^^xsd:string "ISSN"^^xsd:string "ISTC"^^xsd:string
+                "LISSN"^^xsd:string "LSID"^^xsd:string "PMID"^^xsd:string "PURL"^^xsd:string "UPC"^^xsd:string "URL"^^xsd:string "URN"^^xsd:string "URI"^^xsd:string "UCI"^^xsd:string ) ;
+    ] ;
+
+    # R4 RepositoryName (M)
+    sh:property [
+        sh:path dcterms:title ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 1 ;
+    ] ;
+
+    # R4.1 RepositoryNameType (O)
+    sh:property [
+        sh:path datacite:titleType ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:in ( "AlternativeTitle"^^xsd:string "Subtitle"^^xsd:string "TranslatedTitle"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+
+    # R5 Type (M)
+    sh:property [
+        sh:path dcterms:type ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "disciplinary"^^xsd:string "governmental"^^xsd:string "institutional"^^xsd:string "multidisciplinary"^^xsd:string "project-related"^^xsd:string "other"^^xsd:string ) ;
+    ] ;
+
+    # R6 RepositoryLanguage (M) — ISO 639-3 alpha-3
+    sh:property [
+        sh:path dcterms:language ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z]{3}$" ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:description "ISO 639-3 alpha-3 코드 (e.g., kor, eng)" ;
+    ] ;
+
+    # R7 Subject (M) — SKOS Concept 패턴
+    sh:property [
+        sh:path dcterms:subject ;
+        sh:node ttaap:SubjectShape ;
+        sh:minCount 1 ;
+    ] ;
+
+    # R8 InstitutionName (M)
+    sh:property [
+        sh:path re3data:institutionName ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 1 ;
+    ] ;
+
+    # R9 InstitutionCountry (M) — [OVERRIDE] alpha-2
+    sh:property [
+        sh:path re3data:institutionCountry ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{2}$" ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:description "ISO 3166-1 alpha-2 (e.g., KR, US) — Decision-002 OVERRIDE 적용" ;
+    ] ;
+
+    # R10 DatabaseAccessType (M)
+    sh:property [
+        sh:path re3data:databaseAccessType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "open"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string ) ;
+    ] ;
+
+    # R11 DataAccessType (M)
+    sh:property [
+        sh:path re3data:dataAccessType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "open"^^xsd:string "embargoed"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string ) ;
+    ] ;
+
+    # R12 DataLicenseName (M)
+    sh:property [
+        sh:path re3data:dataLicenseName ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+
+    # R13 DataLicenseUrl (M)
+    sh:property [
+        sh:path re3data:dataLicenseURL ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+
+    # R14 DataUpload (M)
+    sh:property [
+        sh:path re3data:dataUpload ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "open"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string ) ;
+    ] ;
+
+    # R15 Versioning (M) — Issue-002: 3-valued boolean+
+    sh:property [
+        sh:path re3data:versioning ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "yes"^^xsd:string "no"^^xsd:string "unknown"^^xsd:string ) ;
+    ] ;
+
+    # R16 EnhancedPublication (M)
+    sh:property [
+        sh:path re3data:enhancedPublication ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "yes"^^xsd:string "no"^^xsd:string "unknown"^^xsd:string ) ;
+    ] ;
+
+    # R17 QualityManagement (M) — ★ Boolean Activation Slot trigger
+    sh:property [
+        sh:path re3data:qualityManagement ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "yes"^^xsd:string "no"^^xsd:string "unknown"^^xsd:string ) ;
+        sh:description "★ Decision-Q4: yes일 때 dqv:hasQualityMetadata 활성화" ;
+    ] ;
+
+    # R18 Description (R)
+    sh:property [
+        sh:path dcterms:description ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 0 ;
+    ] ;
+
+    # R19 ResponsibilityType (O) — Decision-Q7 PROV 보조 매핑
+    sh:property [
+        sh:path re3data:responsibilityType ;
+        sh:maxCount 1 ;
+        sh:in ( "general"^^xsd:string "funding"^^xsd:string "main"^^xsd:string "sponsoring"^^xsd:string "technical"^^xsd:string "other"^^xsd:string ) ;
+    ] ;
+
+    # R20 InstitutionContact (O)
+    sh:property [
+        sh:path dcat:contactPoint ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # R21 RepositoryContact (O) — same predicate as R20, distinguished by usage context
+    .
+
+# Repository → Collection 관계 (4계층 구조 — Decision-1 conflict_notes)
+ttaap:RepositoryHasCollectionShape a sh:NodeShape ;
+    sh:targetClass tta0976:Repository ;
+    sh:property [
+        sh:path ttaap:hasCollection ;
+        sh:node ttaap:CollectionShape ;
+        sh:description "Repository는 Collection 다수 포함 (TTA 4계층 구조)" ;
+    ] .
+
+
+# =============================================================================
+# CollectionShape — TTA Collection 계층 (C1-C12)
+# =============================================================================
+
+ttaap:CollectionShape a sh:NodeShape ;
+    sh:targetClass dctype:Collection ;
+    rdfs:label "TTA-0976 Collection" ;
+    rdfs:comment "컬렉션 계층 — 데이터셋의 논리적 그룹 (C1-C12)" ;
+
+    # C2 Identifier (M)
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+
+    # C2.1 IdentifierType (M)
+    sh:property [
+        sh:path datacite:identifierType ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "ARK"^^xsd:string "arXiv"^^xsd:string "bibcode"^^xsd:string "DOI"^^xsd:string "EAN13"^^xsd:string "EISSN"^^xsd:string "Handle"^^xsd:string "ISBN"^^xsd:string "ISSN"^^xsd:string "ISTC"^^xsd:string
+                "LISSN"^^xsd:string "LSID"^^xsd:string "PMID"^^xsd:string "PURL"^^xsd:string "UPC"^^xsd:string "URL"^^xsd:string "URN"^^xsd:string "URI"^^xsd:string "UCI"^^xsd:string ) ;
+    ] ;
+
+    # C3 Title (M)
+    sh:property [
+        sh:path dcterms:title ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 1 ;
+    ] ;
+
+    # C3.1 TitleType (O)
+    sh:property [
+        sh:path datacite:titleType ;
+        sh:maxCount 1 ;
+        sh:in ( "AlternativeTitle"^^xsd:string "Subtitle"^^xsd:string "TranslatedTitle"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+
+    # C4 Date (R) + C4.1 DateType (M when Date present) — Decision-Q3 PROV conditional
+    sh:property [
+        sh:path dcterms:date ;
+        sh:or (
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:dateTime ]
+        ) ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C4.1 CollectionDateType (M when Date present) — 3 values only (subset)
+    sh:property [
+        sh:path ttaap:CollectionDateType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "Created"^^xsd:string "Updated"^^xsd:string "Deleted"^^xsd:string ) ;
+        sh:description "Collection-only 3개 값 (DataCite 9개 값의 부분집합)" ;
+    ] ;
+
+    # C5 Description (R)
+    sh:property [
+        sh:path dcterms:description ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C6 Subject (R) — SKOS Concept
+    sh:property [
+        sh:path dcterms:subject ;
+        sh:node ttaap:SubjectShape ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C7 Creator (R)
+    sh:property [
+        sh:path dcterms:creator ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C8 Contact (R)
+    sh:property [
+        sh:path dcat:contactPoint ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C9 Rights (R)
+    sh:property [
+        sh:path dcterms:rights ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+    ] ;
+
+    # C10 Keyword (O)
+    sh:property [
+        sh:path dcat:keyword ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # C11 AccessType (O)
+    sh:property [
+        sh:path re3data:dataAccessType ;
+        sh:maxCount 1 ;
+        sh:in ( "open"^^xsd:string "embargoed"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string ) ;
+    ] ;
+
+    # C12 AccessRestriction (O)
+    sh:property [
+        sh:path re3data:dataAccessRestriction ;
+        sh:maxCount 1 ;
+        sh:in ( "feeRequired"^^xsd:string "registration"^^xsd:string "institutional membership"^^xsd:string "non-registration"^^xsd:string "free"^^xsd:string "other"^^xsd:string ) ;
+    ] .
+
+
+# =============================================================================
+# DatasetShape — TTA Dataset 계층 (D1-D15)
+# 발견 3 활용: File 계층은 이 shape를 sh:targetClass dcat:Distribution으로 재사용
+# =============================================================================
+
+ttaap:DatasetShape a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    rdfs:label "TTA-0976 Dataset" ;
+    rdfs:comment "데이터셋 계층 — 파일 그룹 + 메타데이터 (D1-D15)" ;
+
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path datacite:identifierType ;
+        sh:maxCount 1 ;  # [CONFLICT 적용] 본문 M, 부록 O — 부록 우선 (Decision-003)
+        sh:in ( "ARK"^^xsd:string "arXiv"^^xsd:string "bibcode"^^xsd:string "DOI"^^xsd:string "EAN13"^^xsd:string "EISSN"^^xsd:string "Handle"^^xsd:string "ISBN"^^xsd:string "ISSN"^^xsd:string "ISTC"^^xsd:string
+                "LISSN"^^xsd:string "LSID"^^xsd:string "PMID"^^xsd:string "PURL"^^xsd:string "UPC"^^xsd:string "URL"^^xsd:string "URN"^^xsd:string "URI"^^xsd:string "UCI"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path dcterms:title ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path datacite:titleType ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "AlternativeTitle"^^xsd:string "Subtitle"^^xsd:string "TranslatedTitle"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path dcterms:creator ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dcterms:publisher ;
+        sh:minCount 0 ;  # [CONFLICT 적용] 본문 M, 부록 R — 부록 우선 (Decision-004)
+    ] ;
+    sh:property [
+        sh:path datacite:publicationYear ;
+        sh:datatype xsd:gYear ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dcterms:date ;
+        sh:or (
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:dateTime ]
+        ) ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path datacite:dateType ;
+        sh:minCount 0 ;
+        sh:in ( "Accepted"^^xsd:string "Available"^^xsd:string "Copyrighted"^^xsd:string "Collected"^^xsd:string "Created"^^xsd:string "Issued"^^xsd:string
+                "Submitted"^^xsd:string "Updated"^^xsd:string "Valid"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path dcterms:description ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path dcterms:subject ;
+        sh:node ttaap:SubjectShape ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path datacite:contributor ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path datacite:contributorType ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:in ( "ContactPerson"^^xsd:string "DataCollector"^^xsd:string "DataCurator"^^xsd:string "DataManager"^^xsd:string "Distributor"^^xsd:string "Editor"^^xsd:string
+                "Funder"^^xsd:string "HostingInstitution"^^xsd:string "Producer"^^xsd:string "ProjectLeader"^^xsd:string "ProjectManager"^^xsd:string "ProjectMember"^^xsd:string
+                "RegistrationAgency"^^xsd:string "RegistrationAuthority"^^xsd:string "RelatedPerson"^^xsd:string "Researcher"^^xsd:string "ResearchGroup"^^xsd:string
+                "RightsHolder"^^xsd:string "Sponsor"^^xsd:string "Supervisor"^^xsd:string "WorkPackageLeader"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path dcat:contactPoint ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path datacite:rights ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dcat:keyword ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path re3data:dataAccessType ;
+        sh:maxCount 1 ;  # [CHECK] Decision-005 — O 추정
+        sh:in ( "open"^^xsd:string "embargoed"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path re3data:dataAccessRestriction ;
+        sh:maxCount 1 ;
+        sh:in ( "feeRequired"^^xsd:string "registration"^^xsd:string "institutional membership"^^xsd:string "non-registration"^^xsd:string "free"^^xsd:string "other"^^xsd:string ) ;
+    ] .
+
+
+# =============================================================================
+# FileShape — TTA File 계층 (F1-F19) — Dataset과 동형 + Coverage/Type/Format/Size/Unit
+# =============================================================================
+
+ttaap:FileShape a sh:NodeShape ;
+    sh:targetClass dcat:Distribution ;
+    rdfs:label "TTA-0976 File" ;
+    rdfs:comment "파일 계층 — 개별 raw data (F1-F19)" ;
+
+    # F2-F15: Dataset과 거의 동형 (발견 3 활용 — primary copy)
+    sh:property [ sh:path dcterms:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path datacite:identifierType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "ARK"^^xsd:string "arXiv"^^xsd:string "bibcode"^^xsd:string "DOI"^^xsd:string "EAN13"^^xsd:string "EISSN"^^xsd:string "Handle"^^xsd:string "ISBN"^^xsd:string "ISSN"^^xsd:string "ISTC"^^xsd:string
+                "LISSN"^^xsd:string "LSID"^^xsd:string "PMID"^^xsd:string "PURL"^^xsd:string "UPC"^^xsd:string "URL"^^xsd:string "URN"^^xsd:string "URI"^^xsd:string "UCI"^^xsd:string ) ;
+    ] ;
+    sh:property [ sh:path dcterms:title ; sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ; sh:minCount 1 ] ;
+    sh:property [
+        sh:path datacite:titleType ;
+        sh:maxCount 1 ;
+        sh:in ( "AlternativeTitle"^^xsd:string "Subtitle"^^xsd:string "TranslatedTitle"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+    sh:property [ sh:path dcterms:creator ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dcterms:publisher ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path datacite:publicationYear ; sh:datatype xsd:gYear ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path datacite:contributor ; sh:minCount 0 ] ;
+    sh:property [
+        sh:path datacite:contributorType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "ContactPerson"^^xsd:string "DataCollector"^^xsd:string "DataCurator"^^xsd:string "DataManager"^^xsd:string "Distributor"^^xsd:string "Editor"^^xsd:string
+                "Funder"^^xsd:string "HostingInstitution"^^xsd:string "Producer"^^xsd:string "ProjectLeader"^^xsd:string "ProjectManager"^^xsd:string "ProjectMember"^^xsd:string
+                "RegistrationAgency"^^xsd:string "RegistrationAuthority"^^xsd:string "RelatedPerson"^^xsd:string "Researcher"^^xsd:string "ResearchGroup"^^xsd:string
+                "RightsHolder"^^xsd:string "Sponsor"^^xsd:string "Supervisor"^^xsd:string "WorkPackageLeader"^^xsd:string "Other"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path dcterms:date ;
+        sh:or ( [ sh:datatype xsd:date ] [ sh:datatype xsd:dateTime ] ) ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path datacite:dateType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( "Accepted"^^xsd:string "Available"^^xsd:string "Copyrighted"^^xsd:string "Collected"^^xsd:string "Created"^^xsd:string "Issued"^^xsd:string
+                "Submitted"^^xsd:string "Updated"^^xsd:string "Valid"^^xsd:string ) ;
+    ] ;
+    sh:property [ sh:path dcterms:description ; sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ; sh:minCount 0 ] ;
+    sh:property [ sh:path dcterms:subject ; sh:node ttaap:SubjectShape ; sh:minCount 0 ] ;
+    sh:property [ sh:path dcat:contactPoint ; sh:minCount 0 ] ;
+    sh:property [ sh:path datacite:rights ; sh:minCount 0 ] ;
+    sh:property [ sh:path dcat:keyword ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path re3data:dataAccessType ;
+        sh:maxCount 1 ;
+        sh:in ( "opened"^^xsd:string "restricted"^^xsd:string "closed"^^xsd:string "embargoed"^^xsd:string ) ;
+    ] ;
+    sh:property [
+        sh:path re3data:dataAccessRestriction ;
+        sh:maxCount 1 ;
+        sh:in ( "feeRequired"^^xsd:string "registration"^^xsd:string "institutional membership"^^xsd:string "non-registration"^^xsd:string "free"^^xsd:string "other"^^xsd:string ) ;
+    ] ;
+
+    # F16 Coverage (O) — ★ Decision-3.1 sh:or dual-purpose
+    sh:property [
+        sh:path dcterms:coverage ;
+        sh:maxCount 1 ;
+        sh:or (
+            [ sh:datatype xsd:string ]   # 자유 텍스트 (지역명 등)
+            [ sh:datatype xsd:dateTime ] # 시간 형식
+            [ sh:datatype xsd:date ]
+            [ sh:nodeKind sh:IRI ]       # PlaceURI 등
+        ) ;
+        sh:description "★ Decision-3.1: Coverage dual-purpose. 검증 단계에서 sh:or로 분기. 변환 시 dcterms:temporal/spatial로 분리 권장" ;
+    ] ;
+
+    # F17 Type (O) — DCMI Type Vocabulary 11개 + 'other' (TTA 추가)
+    sh:property [
+        sh:path dcterms:type ;
+        sh:maxCount 1 ;
+        sh:in ( dctype:Event dctype:Image dctype:InteractiveResource dctype:MovingImage
+                dctype:PhysicalObject dctype:Service dctype:Software dctype:Sound
+                dctype:StillImage dctype:Text dctype:Collection dctype:Dataset
+                "other"^^xsd:string ) ;
+        sh:description "DCMI Type Vocabulary 12개 (Collection/Dataset 포함) + TTA 'other' (Issue-004)" ;
+    ] ;
+
+    # F18 Format (O)
+    sh:property [
+        sh:path dcterms:format ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # F19 Size (O)
+    sh:property [
+        sh:path dcterms:extent ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # F19.1 Unit (O) — schema:unitText (Rule 3 사례)
+    sh:property [
+        sh:path schema:unitText ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:in ( "B"^^xsd:string "MB"^^xsd:string "GB"^^xsd:string "TB"^^xsd:string ) ;
+        sh:description "정규화: 'Mega Byte' → 'MB'. UN/CEFACT Common Code 기준" ;
+    ] .
+
+
+# =============================================================================
+# SubjectShape — Subject Class 1:N 구조 변환 (★ SKOS Concept 패턴, Decision-2)
+# 4계층 모두 재사용 (Repository/Collection/Dataset/File Subject)
+# =============================================================================
+
+ttaap:SubjectShape a sh:NodeShape ;
+    rdfs:label "TTA-0976 Subject (SKOS Concept 변환)" ;
+    rdfs:comment "★ Decision-2 (a)(b): Subject Class를 SKOS Concept으로 변환. 통제어 사용 시 ConceptScheme 정의, 자유 텍스트면 Concept만." ;
+
+    sh:targetClass skos:Concept ;
+
+    # SubjectScheme → skos:inScheme
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:description "주제 분류 체계 (예: DFG)" ;
+    ] ;
+
+    # SubjectID → skos:notation
+    sh:property [
+        sh:path skos:notation ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # SubjectName → skos:prefLabel (★ Decision-2(b): 1:N 카디널리티 명시)
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1000 ;
+        sh:description "주제 명칭. 다국어 가능 — Decision-2(b) 1:N 카디널리티 (sh:minCount 0; sh:maxCount unbounded)" ;
+    ] .
+
+
+# =============================================================================
+# ★ QualityMetadataShape — Boolean Activation Slot (Decision-Q4)
+# QualityManagement="yes"일 때만 활성화. SHACL conditional shape 패턴.
+# =============================================================================
+
+ttaap:QualityActivationShape a sh:NodeShape ;
+    sh:targetClass tta0976:Repository ;
+    rdfs:label "TTA-0976 Quality Activation Slot (Decision-Q4)" ;
+    rdfs:comment "★ Boolean Activation Slot 패턴: re3data:qualityManagement='yes'일 때 dqv:hasQualityMetadata 활성화" ;
+
+    # 조건부 활성화: qualityManagement="yes"이면 hasQualityMetadata 슬롯 필수
+    sh:property [
+        sh:path dqv:hasQualityMetadata ;
+        sh:minCount 0 ;
+        # sh:if equivalent: SHACL Core does not have sh:if directly,
+        # use sh:and + sh:or + sh:not to express conditional
+    ] ;
+
+    # 명시적 conditional via sh:and pattern
+    sh:and (
+        # Branch 1: qualityManagement="yes" → hasQualityMetadata 필수 (≥1)
+        [
+            sh:property [
+                sh:path re3data:qualityManagement ;
+                sh:hasValue "yes" ;
+            ] ;
+            sh:property [
+                sh:path dqv:hasQualityMetadata ;
+                sh:minCount 1 ;
+                sh:description "qualityManagement=yes일 때 활성" ;
+            ] ;
+        ]
+    ) .
+
+
+# =============================================================================
+# ★ ProvenanceShape — PROV-O 보조 매핑 (Decision-Q3/Q7) — Date+DateType 조건부
+# =============================================================================
+
+ttaap:ProvenanceConditionalShape a sh:NodeShape ;
+    rdfs:label "TTA-0976 PROV-O Conditional Mapping (Decision-Q3)" ;
+    rdfs:comment "Date+DateType 조합에 따라 prov:generatedAtTime/wasRevisionOf/invalidatedAtTime 활성" ;
+
+    # 적용 대상: Collection/Dataset/File (각 계층의 Date 항목)
+    # ★ targetClass 비활성 (advisory shape only — Decision-Q3 conditional은 SHACL Core로 완전 표현 어려움. SHACL-AF 또는 코드 보조 권장)
+    # sh:targetClass dctype:Collection ;
+    # sh:targetClass dcat:Dataset ;
+    # sh:targetClass dcat:Distribution ;
+
+    # DateType=Created → prov:generatedAtTime
+    sh:and (
+        [
+            sh:property [ sh:path datacite:dateType ; sh:hasValue "Created" ] ;
+            sh:property [ sh:path prov:generatedAtTime ; sh:datatype xsd:dateTime ; sh:minCount 0 ] ;
+        ]
+    ) ;
+
+    # DateType=Updated → prov:wasRevisionOf (자원 간 관계)
+    # Note: 이 패턴은 SHACL Core로 완전 표현 어려움. SHACL-AF (advanced features) 또는 검증 코드 보조 권장.
+    .
+
+
+# =============================================================================
+# 산출 메타데이터
+# =============================================================================
+
+<https://standard.tta.or.kr/ai-ready/profile> a owl:Ontology ;
+    rdfs:label "TTAK.KO-10.0976 AI-Ready Application Profile Shapes" ;
+    rdfs:comment "Version 1.0.0 (2026-05-04). SHACL Core + selected SHACL-AF features." ;
+    owl:versionInfo "1.0.0" .

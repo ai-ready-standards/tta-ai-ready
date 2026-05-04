@@ -88,13 +88,12 @@ nav:
       - P-03 태깅·라벨링: standards/p-03.md
       - P-04 농업 AI: standards/p-04.md
       - P-05 철강 제조: standards/p-05.md
-  - 스키마 레퍼런스:
-      - 개요: reference/index.md
-      - Collection (C1~C12): reference/collection.md
-      - Dataset (D1~D15): reference/dataset.md
-      - File (F1~F19): reference/file.md
-      - Repository (R1~R21): reference/repository.md
-      - 통제어 14종: reference/vocabularies.md
+  - 스키마 레퍼런스: reference/index.md
+  - 매핑 자료실:
+      - 개요: methodology/index.md
+      - 인벤토리 (478행): methodology/inventory.md
+      - 매핑 매트릭스 (93행): methodology/mappings.md
+      - 보고서 (Phase A~D): methodology/reports.md
   - 시작하기: getting-started.md
   - 검증해보기: validate.md
   - 사업 문서:

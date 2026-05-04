@@ -1,0 +1,111 @@
+{
+  "@context": "https://standard.tta.or.kr/ai-ready/profile/context.jsonld",
+  "@type": "Repository",
+  "@id": "https://dataon.kisti.re.kr",
+
+  "RepositoryUrl": "https://dataon.kisti.re.kr",
+  "RepositoryIdentifier": "10.5072/REP-DataON-001",
+  "RepositoryIdentifierType": "DOI",
+
+  "RepositoryName": {
+    "ko": "DataON",
+    "en": "DataON"
+  },
+  "RepositoryNameType": "Other",
+
+  "RepositoryType": "institutional",
+  "RepositoryLanguage": "kor",
+
+  "RepositorySubject": [
+    {
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Information Science",
+      "skos:inScheme": {"@id": "DFG"},
+      "skos:notation": "54200"
+    },
+    {
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Computer Science",
+      "skos:inScheme": {"@id": "DFG"},
+      "skos:notation": "40900"
+    }
+  ],
+
+  "InstitutionName": {
+    "ko": "한국과학기술정보연구원",
+    "en": "Korea Institute of Science and Technology Information"
+  },
+  "InstitutionCountry": "KR",
+
+  "DatabaseAccessType": "open",
+  "DataAccessType": "open",
+  "DataLicenseName": "Creative Commons Attribution 4.0 International",
+  "DataLicenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+  "DataUpload": "restricted",
+  "Versioning": "yes",
+  "EnhancedPublication": "no",
+  "QualityManagement": "yes",
+
+  "RepositoryDescription": {
+    "ko": "DataON은 KISTI가 운영하는 국가 연구데이터 플랫폼으로, 한국 연구자들이 생산한 연구데이터의 등록·공유·재이용을 지원합니다.",
+    "en": "DataON is a national research data platform operated by KISTI, supporting registration, sharing, and reuse of research data produced by Korean researchers."
+  },
+
+  "ResponsibilityType": "general",
+
+  "InstitutionContact": {
+    "@type": "vcard:Kind",
+    "vcard:fn": "DataON 운영팀",
+    "vcard:hasEmail": {"@id": "mailto:dataon@kisti.re.kr"}
+  },
+  "RepositoryContact": {
+    "@type": "vcard:Kind",
+    "vcard:fn": "DataON Help Desk",
+    "vcard:hasEmail": {"@id": "mailto:help@dataon.kisti.re.kr"}
+  },
+
+  "//": "★ Boolean Activation Slot 활성 (Decision-Q4) — QualityManagement='yes'이므로",
+  "hasQualityMetadata": {
+    "@type": "dqv:QualityMetadata",
+    "dqv:hasQualityMeasurement": [
+      {
+        "@type": "dqv:QualityMeasurement",
+        "dqv:isMeasurementOf": {"@id": "ttaap:metric/metadataCompleteness"},
+        "dqv:value": 0.94,
+        "dqv:computedOn": {"@id": "https://dataon.kisti.re.kr"}
+      }
+    ]
+  },
+
+  "//": "Repository → Collection 관계 (TTA 4계층 구조)",
+  "ttaap:hasCollection": [
+    {
+      "@type": "Collection",
+      "@id": "https://dataon.kisti.re.kr/collection/biotech-2026",
+      "CollectionIdentifier": "10.5072/COL-BIOTECH-2026",
+      "CollectionIdentifierType": "DOI",
+      "CollectionTitle": {
+        "ko": "2026 생명공학 연구 컬렉션",
+        "en": "2026 Biotechnology Research Collection"
+      },
+      "CollectionDate": "2026-01-15",
+      "CollectionDateType": "Created",
+      "CollectionDescription": {
+        "ko": "2026년 KISTI에 등록된 생명공학 분야 연구데이터 컬렉션입니다."
+      },
+      "CollectionSubject": [
+        {
+          "@type": "skos:Concept",
+          "skos:prefLabel": "Biotechnology",
+          "skos:inScheme": {"@id": "DFG"},
+          "skos:notation": "20603"
+        }
+      ],
+      "CollectionCreator": ["김선태", "한국과학기술정보연구원"],
+      "CollectionRights": "본 컬렉션의 저작권은 한국과학기술정보연구원에서 소유함.",
+      "CollectionKeyword": "biotechnology, genomics, proteomics, KISTI",
+      "CollectionAccessType": "open",
+      "CollectionAccessRestriction": "free"
+    }
+  ]
+}

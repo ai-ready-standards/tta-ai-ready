@@ -1,0 +1,71 @@
+name: Vocab Refresh
+
+# 매주 월요일 새벽 4시(UTC, KST 13시)에 12종 국제 어휘를 최신본으로 갱신.
+# 변경이 감지되면 자동 PR 생성.
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch vocabularies
+        run: bash tools/scripts/fetch_vocabularies.sh
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet vocabularies/cached/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "변경 없음"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "변경 감지:"
+            git diff --stat vocabularies/cached/
+          fi
+
+      - name: Update manifest timestamp
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          sed -i "s/\"generated_at\": \"[0-9-]*\"/\"generated_at\": \"$DATE\"/" vocabularies/cached/MANIFEST.json
+
+      - name: Verify mappings still pass
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          pip install -e tools/validator/
+          tta-verify-mappings
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(vocab): auto-refresh international vocabularies"
+          title: "chore(vocab): 국제 어휘 자동 갱신 (주간)"
+          body: |
+            ## 자동 어휘 갱신
+
+            `tools/scripts/fetch_vocabularies.sh`가 12개 국제 어휘를 다시 받았고 변경이 감지되었습니다.
+
+            ### 검증
+            - [x] tta-verify-mappings 통과 (변경 후에도 100%)
+
+            ### 검토 항목
+            - 어휘 변경의 의미 있는 영향 (deprecated 항목 등)
+            - 기존 매핑이 여전히 유효한지
+
+            머지 전 [`reports/`](../reports/) 갱신 검토 권장.
+
+            ---
+            🤖 자동 생성됨 (Vocab Refresh workflow)
+          branch: chore/vocab-refresh
+          delete-branch: true
