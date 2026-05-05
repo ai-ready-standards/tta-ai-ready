@@ -42,19 +42,19 @@
 
 ```mermaid
 flowchart TB
-    A["AI 레디 표준 프레임워크 정의서<br/>━━━<br/>본 문서 · WBS B-3<br/>규범적 (Normative)"]
-    B["표준화 지침 개정안<br/>━━━<br/>WBS B-5 → B-10<br/>SPC 심의 통과 후 의무화"]
-    C["5종 파일럿 패키지<br/>━━━<br/>P-01 ~ P-05 · WBS C-5 ~ C-9<br/>본 프레임워크 적용 결과"]
-    D["매뉴얼 3종<br/>━━━<br/>TC 개발 가이드 / 전환 / 사용자<br/>WBS D-2 / D-3 / D-4"]
+    A["📜 AI 레디 표준 프레임워크 정의서<br/>━━━━━━━━━━━<br/>본 문서 · WBS B-3<br/>규범적 (Normative)"]
+    B["⚖️ 표준화 지침 개정안<br/>━━━━━━━━━━━<br/>WBS B-5 → B-10<br/>SPC 심의 통과 후 의무화"]
+    C["📦 5종 파일럿 패키지<br/>━━━━━━━━━━━<br/>P-01 ~ P-05 · WBS C-5 ~ C-9<br/>본 프레임워크 적용 결과"]
+    D["📖 매뉴얼 3종<br/>━━━━━━━━━━━<br/>TC 개발 / 전환 / 사용자<br/>WBS D-2 / D-3 / D-4"]
 
     A == "정의·적용" ==> B
     B == "TTA 거버넌스 통합·의무화" ==> C
     C == "사용 가이드 작성" ==> D
 
-    style A fill:#2C5BA8,color:#ffffff,stroke:#0D2548,stroke-width:3px
-    style B fill:#6589C2,color:#ffffff,stroke:#1F3D7A,stroke-width:2px
-    style C fill:#A8C5E8,color:#0D2548,stroke:#1F3D7A,stroke-width:2px
-    style D fill:#DCE9F7,color:#0D2548,stroke:#1F3D7A,stroke-width:2px
+    style A fill:#FFF8DC,stroke:#1F3D7A,stroke-width:5px
+    style B fill:#F0F4FA,stroke:#1F3D7A,stroke-width:3px
+    style C fill:#F5F8FB,stroke:#5A7FB8,stroke-width:2px
+    style D fill:#FAFCFE,stroke:#7AA3D5,stroke-width:2px
 ```
 
 | 산출물 | 역할 | 누가 작성 | 언제 발행 |
