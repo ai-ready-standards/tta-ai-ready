@@ -23,8 +23,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--shapes-dir",
         type=Path,
-        default=Path("standards/P-01-research-data/shapes"),
-        help="SHACL shapes 디렉토리 (default: P-01)",
+        default=Path("standards/P-01-research-data/2_schema"),
+        help="SHACL shapes (.ttl) 디렉토리 (default: P-01의 2_schema)",
     )
     parser.add_argument(
         "--ci",

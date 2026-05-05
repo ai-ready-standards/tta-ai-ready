@@ -43,22 +43,23 @@
 
 ### 1. 가장 가까운 템플릿 받기
 
-[:material-download: 데이터셋 최소 템플릿](https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/examples/valid/dataset-minimal.jsonld){ .md-button .md-button--primary }
+[:material-download: NIE 환경 Dataset 예시](https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/5_examples/nie_environmental.jsonld){ .md-button .md-button--primary }
+[:material-download: RDA 농업 Dataset 예시](https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/5_examples/rda_agriculture.jsonld){ .md-button }
 
 ### 2. 자기 정보로 채우기
 
 ```json
 {
-  "@context": "https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/schema/context.jsonld",
-  "id": "여기에 데이터셋 식별자",
-  "type": "Dataset",
+  "@context": "https://raw.githubusercontent.com/ai-ready-standards/tta-ai-ready/main/standards/P-01-research-data/2_schema/context.jsonld",
+  "@id": "여기에 데이터셋 식별자",
+  "@type": "Dataset",
 
-  "identifier": "DOI 또는 URI",
-  "identifierType": "DOI",
-  "title": {"ko": "데이터셋 이름"},
-  "creator": {"type": "Person", "name": "본인 이름"},
-  "publisher": {"type": "Organization", "name": "소속 기관"},
-  "publicationYear": "2026"
+  "Identifier": "DOI 또는 URI",
+  "IdentifierType": "DOI",
+  "Title": {"ko": "데이터셋 이름", "en": "Dataset Name"},
+  "Creator": "본인 이름",
+  "Publisher": "소속 기관",
+  "PublicationYear": "2026"
 }
 ```
 
@@ -108,7 +109,7 @@ from pathlib import Path
 
 result = validate_file(
     Path("your-dataset.jsonld"),
-    Path("standards/P-01-research-data/shapes"),
+    Path("standards/P-01-research-data/2_schema"),
 )
 print(f"M:{result.violations}  R:{result.warnings}  O:{result.infos}")
 if result.violations > 0:

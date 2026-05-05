@@ -47,7 +47,7 @@ git clone https://github.com/ai-ready-standards/tta-ai-ready.git
 cd tta-ai-ready
 python3.11 -m venv venv && source venv/bin/activate
 pip install -e tools/validator/
-tta-validator standards/P-01-research-data/examples/valid/
+tta-validator standards/P-01-research-data/5_examples/
 ```
 
 ### 사이트 로컬 미리보기
