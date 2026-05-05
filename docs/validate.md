@@ -1,6 +1,11 @@
 # 검증해보기
 
-본인의 메타데이터(JSON-LD)를 본 표준에 맞춰 자동 검증할 수 있습니다.
+본인의 메타데이터(JSON-LD)를 본 표준에 맞춰 자동 검증할 수 있습니다. 두 가지 검증 도구가 제공됩니다.
+
+| 도구 | 위치 | 용도 |
+| --- | --- | --- |
+| **`tta-validator`** | `tools/validator/` | 범용 SHACL 검증 CLI (M/R/O 등급 분류 출력) |
+| **`validate.py`** | `standards/P-01-research-data/4_validator/` | P-01 전용 (inline_local_context 포함) |
 
 ## 권장 방법: GitHub Codespaces (브라우저)
 
@@ -16,7 +21,12 @@
 4. 터미널에서 다음 명령으로 즉시 검증
 
 ```bash
-tta-validator standards/P-01-research-data/examples/valid/
+# 옵션 A — P-01 전용 검증기 (CI에서 사용하는 것과 동일)
+python standards/P-01-research-data/4_validator/validate.py \
+       standards/P-01-research-data/5_examples/kisti_dataon.jsonld
+
+# 옵션 B — 범용 tta-validator (디렉토리 일괄 + M/R/O 출력)
+tta-validator standards/P-01-research-data/5_examples/
 ```
 
 본인 파일을 업로드하려면 VS Code 좌측 파일 트리에 드래그·드롭하면 됩니다.
@@ -31,6 +41,7 @@ cd tta-ai-ready
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -e tools/validator/
+pip install pydantic pyshacl rdflib pyld
 ```
 
 ### Windows (PowerShell)
@@ -41,6 +52,7 @@ cd tta-ai-ready
 py -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -e tools/validator/
+pip install pydantic pyshacl rdflib pyld
 ```
 
 ## 검증 실행
@@ -48,13 +60,21 @@ pip install -e tools/validator/
 ### 단일 파일
 
 ```bash
-tta-validator your-file.jsonld
+# 가장 단순한 사용
+python standards/P-01-research-data/4_validator/validate.py your-file.jsonld
 ```
 
-### 디렉토리 일괄
+### 디렉토리 일괄 (M/R/O 등급별 카운트)
 
 ```bash
+# tta-validator는 P-01의 2_schema를 기본 shapes-dir로 사용
 tta-validator path/to/your/datasets/
+```
+
+### 다른 표준의 SHACL shape 사용
+
+```bash
+tta-validator your-file.jsonld --shapes-dir standards/P-04-agriculture/2_schema
 ```
 
 ### CI 모드 (M 위반 시 exit 1)
@@ -65,12 +85,16 @@ tta-validator path/ --ci
 
 ## 결과 해석
 
+`tta-validator`의 일반적 출력:
+
 ```
-검증 대상: 1개 파일 / shapes: standards/P-01-research-data/shapes
+검증 대상: 3개 파일 / shapes: standards/P-01-research-data/2_schema
 ------------------------------------------------------------
-  ✓ your-dataset.jsonld  (M:0 R:2 O:0)
+  ✓ kisti_dataon.jsonld           (M:0 R:0 O:0)
+  ✓ nie_environmental.jsonld     (M:0 R:0 O:0)
+  ✓ rda_agriculture.jsonld       (M:0 R:0 O:0)
 ------------------------------------------------------------
-합계: 1개 / 위반(M)=0  경고(R)=2  정보(O)=0
+합계: 3개 / 위반(M)=0  경고(R)=0  정보(O)=0
 ```
 
 | 마커 | 의미 |
@@ -84,27 +108,36 @@ tta-validator path/ --ci
 | **R** (Recommended) | 권고 미준수 | 가능하면 보완 |
 | **O** (Optional) | 정보성 | 통계 / 리포팅 용도 |
 
-## 의도된 오류로 동작 확인
+## 어휘 매핑 검증 (별도 도구)
 
-본 저장소의 음성 테스트 케이스로 검증 도구가 정확히 오류를 잡는지 확인할 수 있습니다.
+JSON-LD/SHACL 매핑이 정식 어휘에 존재하는지 확인:
 
 ```bash
-tta-validator standards/P-01-research-data/examples/invalid/ --expect-fail -v
+tta-verify-mappings
 ```
 
-이 명령은 의도된 D2/D5 누락을 정확히 보고하며, **M 위반이 발견되면 통과**(exit 0)로 처리됩니다.
+```
+국제 어휘 매핑 검증
+------------------------------------------------------------
+✓ 75/75 매핑 모두 정식 어휘에 존재 (100.0%)
+```
 
 ## 자주 묻는 질문
 
 ??? question "어떤 SHACL shapes가 적용되나요?"
-    `--shapes-dir` 옵션으로 명시하지 않으면 P-01의 4개 shape(`collection.ttl`, `dataset.ttl`, `file.ttl`, `repository.ttl`)이 적용됩니다. 다른 표준의 shape를 사용하려면:
+    `--shapes-dir` 옵션으로 명시하지 않으면 **P-01의 `2_schema/shapes.shacl.ttl`**이 자동 적용됩니다. 다른 표준의 shape를 사용하려면:
     
     ```bash
-    tta-validator your-file.jsonld --shapes-dir standards/P-04-agriculture/shapes
+    tta-validator your-file.jsonld --shapes-dir standards/P-04-agriculture/2_schema
     ```
 
 ??? question "JSON-LD 문법 오류는 어떻게 진단하나요?"
     `tta-validator`의 출력에서 `[parse-error]`로 표시됩니다. 가장 흔한 원인은 `@context` 경로 오류 또는 따옴표 누락입니다.
+    
+    더 자세한 오류 메시지를 보려면 ARD 기반 `validate.py`를 사용하세요:
+    ```bash
+    python standards/P-01-research-data/4_validator/validate.py your-file.jsonld
+    ```
 
 ??? question "Phase B에 추가될 온라인 검증 폼은 언제 나오나요?"
     사업 후반부(11월 이후)에 검토 후 결정됩니다. 우선은 Codespaces 옵션을 권장합니다.

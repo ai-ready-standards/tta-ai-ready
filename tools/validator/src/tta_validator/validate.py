@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -19,10 +20,32 @@ class ValidationResult:
     text: str
 
 
-def _load_data_graph(jsonld_path: Path) -> rdflib.Graph:
-    """JSON-LD 파일을 rdflib Graph로 로드. 상대 @context를 절대 경로로 해석."""
+def _inline_local_context(jsonld_path: Path, shapes_dir: Path) -> str:
+    """JSON-LD의 @context가 원격 URL이면 shapes_dir/context.jsonld로 치환.
+
+    네트워크 fetch 실패 회피용. ARD의 inline_local_context()와 동일 로직.
+    """
+    with jsonld_path.open(encoding="utf-8") as f:
+        doc = json.load(f)
+    ctx_value = doc.get("@context")
+    if isinstance(ctx_value, str) and ctx_value.startswith(("http://", "https://")):
+        local_ctx = shapes_dir / "context.jsonld"
+        if local_ctx.is_file():
+            with local_ctx.open(encoding="utf-8") as f:
+                local_doc = json.load(f)
+            doc["@context"] = local_doc.get("@context", local_doc)
+    return json.dumps(doc, ensure_ascii=False)
+
+
+def _load_data_graph(jsonld_path: Path, shapes_dir: Path | None = None) -> rdflib.Graph:
+    """JSON-LD 파일을 rdflib Graph로 로드. @context URL은 로컬 context.jsonld로 치환."""
     graph = rdflib.Graph()
-    graph.parse(str(jsonld_path), format="json-ld", base=jsonld_path.absolute().as_uri())
+    if shapes_dir is not None and (shapes_dir / "context.jsonld").is_file():
+        # 원격 @context를 로컬로 치환
+        data_str = _inline_local_context(jsonld_path, shapes_dir)
+        graph.parse(data=data_str, format="json-ld", base=jsonld_path.absolute().as_uri())
+    else:
+        graph.parse(str(jsonld_path), format="json-ld", base=jsonld_path.absolute().as_uri())
     return graph
 
 
@@ -60,7 +83,7 @@ def validate_file(
     shapes_dir: Path,
 ) -> ValidationResult:
     """단일 JSON-LD 파일을 SHACL shapes로 검증."""
-    data_graph = _load_data_graph(jsonld_path)
+    data_graph = _load_data_graph(jsonld_path, shapes_dir)
     shapes_graph = _load_shapes(shapes_dir)
 
     conforms, results_graph, results_text = pyshacl_validate(
