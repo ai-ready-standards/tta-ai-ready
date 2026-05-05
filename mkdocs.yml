@@ -98,5 +98,9 @@ nav:
   - 검증해보기: validate.md
   - 사업 문서:
       - 프레임워크: framework/index.md
-      - 매뉴얼: manuals/index.md
+      - 매뉴얼:
+          - 개요: manuals/index.md
+          - TC 개발 가이드: manuals/tc-developer-guide.md
+          - 기존 표준 전환: manuals/migration-guide.md
+          - 리포지토리 사용자 가이드: manuals/user-guide.md
       - 리포지토리: repository/index.md
