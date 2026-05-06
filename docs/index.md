@@ -13,6 +13,7 @@ hide:
 
 [5종 표준 둘러보기 :material-arrow-right:](standards/index.md){ .md-button .md-button--primary }
 [직접 검증해보기 :material-test-tube:](validate.md){ .md-button }
+[용어집 :material-book-alphabet:](glossary.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/ai-ready-standards/tta-ai-ready){ .md-button }
 
 ---

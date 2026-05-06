@@ -100,6 +100,7 @@ nav:
       - 보고서 (Phase A~D): methodology/reports.md
   - 시작하기: getting-started.md
   - 검증해보기: validate.md
+  - 용어집: glossary.md
   - 사업 문서:
       - 프레임워크: framework/index.md
       - 매뉴얼:
