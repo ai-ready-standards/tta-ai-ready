@@ -1,0 +1,47 @@
+# GitHub PR 자동 라벨링 설정 (actions/labeler@v5)
+# B-12 라이프사이클의 자동 reviewer/카테고리 분류 자동화
+
+# 신규 표준 초안
+proposal:draft:
+  - changed-files:
+      - any-glob-to-any-file: 'standards/P-*/1_document/**'
+
+# PG606 검토 필요 영역
+needs-pg606-review:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'standards/P-*/2_schema/**'
+          - 'standards/P-*/6_changelog/**'
+
+# TC 검토 필요 영역
+needs-tc-review:
+  - changed-files:
+      - any-glob-to-any-file: 'standards/P-*/5_examples/**'
+
+# 어휘·매핑 변경
+needs-vocab-update:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'inventory/**'
+          - 'mappings/**'
+          - 'vocabularies/**'
+
+# 자동 검증 도구 변경
+tooling:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'tools/**'
+          - '.github/workflows/**'
+
+# 사이트·문서
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: 'docs/**'
+
+# 사업 운영 문서
+governance:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'CODEOWNERS'
+          - 'CONTRIBUTING.md'
+          - 'LICENSE'

@@ -1,0 +1,150 @@
+name: Proposal Validation
+
+# 표준 제안 라이프사이클 (B-12) ⑩ 심의 단계의 자동 검증 워크플로우.
+#
+# PR이 표준 패키지(standards/P-*-*) 또는 매핑(mappings/)을 변경할 때 발동.
+# 6-패키지 구조·AP 명세·매핑 매트릭스 품질을 자동 검증한다.
+
+on:
+  pull_request:
+    paths:
+      - 'standards/P-*-*/**'
+      - 'mappings/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  detect-changes:
+    name: 변경 표준 패키지 감지
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changed.outputs.packages }}
+      has_changes: ${{ steps.changed.outputs.has_changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed packages
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+            CHANGED=$(git diff --name-only "$BASE" "$HEAD" \
+              | grep -E "^standards/P-[0-9]+-" \
+              | cut -d/ -f1-2 \
+              | sort -u \
+              | tr '\n' ' ')
+          else
+            CHANGED=$(ls -d standards/P-*-* 2>/dev/null | tr '\n' ' ')
+          fi
+
+          echo "변경된 패키지: '$CHANGED'"
+          echo "packages=$CHANGED" >> "$GITHUB_OUTPUT"
+
+          if [ -n "$CHANGED" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  package-structure:
+    name: 6-패키지 구조 완전성
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify 6-package structure
+        run: bash tools/scripts/check_package_structure.sh ${{ needs.detect-changes.outputs.packages }}
+
+  ap-document:
+    name: AP 명세 6 섹션 완전성
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify AP sections
+        run: bash tools/scripts/check_ap_sections.sh ${{ needs.detect-changes.outputs.packages }}
+
+  mapping-quality:
+    name: 매핑 매트릭스 품질
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check mapping quality
+        run: |
+          shopt -s nullglob
+          csvs=(mappings/tta-*_x_components.csv)
+          if [ ${#csvs[@]} -eq 0 ]; then
+            echo "ℹ️ 검사할 매트릭스 CSV 없음 (mappings/tta-*_x_components.csv 패턴)"
+            exit 0
+          fi
+          python tools/scripts/check_mapping_quality.py "${csvs[@]}"
+
+  changed-package-tests:
+    name: 변경 패키지의 Pydantic·SHACL 검증
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pydantic pyshacl rdflib pyld pytest
+
+      - name: Per-package tests
+        run: |
+          for pkg in ${{ needs.detect-changes.outputs.packages }}; do
+            [ -d "$pkg" ] || continue
+            echo ""
+            echo "============================================================"
+            echo "  $pkg"
+            echo "============================================================"
+
+            # Pydantic 테스트 (3_code/tests 있을 때만)
+            if [ -d "$pkg/3_code/tests" ] && ls "$pkg/3_code/tests/"*.py >/dev/null 2>&1; then
+              echo "── Pydantic tests"
+              ( cd "$pkg/3_code" && PYTHONPATH=. pytest tests/ -v )
+            else
+              echo "ℹ️ $pkg/3_code/tests 없음 — Pydantic 테스트 생략"
+            fi
+
+            # SHACL 검증 (5_examples + 4_validator/validate.py 있을 때만)
+            if [ -d "$pkg/5_examples" ] \
+               && [ -f "$pkg/4_validator/validate.py" ] \
+               && ls "$pkg/5_examples/"*.jsonld >/dev/null 2>&1; then
+              echo "── SHACL validation"
+              ( cd "$pkg" && \
+                for f in 5_examples/*.jsonld; do
+                  [ -f "$f" ] || continue
+                  python 4_validator/validate.py "$f"
+                done )
+            else
+              echo "ℹ️ $pkg/5_examples 또는 4_validator/validate.py 없음 — SHACL 검증 생략"
+            fi
+          done
+
+  auto-label:
+    name: PR 자동 라벨링
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          configuration-path: .github/labeler.yml
+          sync-labels: true
