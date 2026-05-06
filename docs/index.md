@@ -12,6 +12,7 @@ hide:
 한국정보통신기술협회(TTA)의 AI 레디 표준 생태계 조성 사업의 공개 카탈로그입니다. 5종 시범 표준이 JSON-LD 스키마 · SHACL 검증 규칙 · 참조 구현 코드 · 예시 데이터셋 패키지로 제공됩니다.
 
 [5종 표준 둘러보기 :material-arrow-right:](standards/index.md){ .md-button .md-button--primary }
+[새 표준 제안하기 :material-rocket:](lifecycle.md){ .md-button .md-button--primary }
 [직접 검증해보기 :material-test-tube:](validate.md){ .md-button }
 [용어집 :material-book-alphabet:](glossary.md){ .md-button }
 [GitHub :fontawesome-brands-github:](https://github.com/ai-ready-standards/tta-ai-ready){ .md-button }
