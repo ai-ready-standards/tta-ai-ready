@@ -23,7 +23,7 @@
 ### 1.2 본 AP의 6 패키지 산출물
 
 ```
-D:\ARD\packages\tta-0976\
+standards/P-01-research-data/
 ├── 1_document\         ← 본 문서
 ├── 2_schema\
 │   ├── context.jsonld  (170 lines, 91개 property 매핑)
@@ -128,7 +128,7 @@ DCAT 3계층:       Catalog ─ ─ ─ (없음) ─ ─ ─ Dataset ─ Distrib
 | Q5 | 통제어 매핑 단위 | 값 단위 매핑 (117 enum 모두) |
 | Q7 | Repository PROV | Decision-Q3와 일관 적용 |
 
-전체 결정 사항과 근거: `6_changelog/CHANGELOG.md` 또는 `D:\ARD\reports\tta-0976_mapping_conflicts.md` 참조.
+전체 결정 사항과 근거: `6_changelog/CHANGELOG.md` 또는 `reports/tta-0976_mapping_conflicts.md` 참조.
 
 ---
 
@@ -170,7 +170,7 @@ DCAT 3계층:       Catalog ─ ─ ─ (없음) ─ ─ ─ Dataset ─ Distrib
 ### 6.2 SHACL 검증
 
 ```bash
-cd D:\ARD\packages\tta-0976\
+cd standards/P-01-research-data/
 python 4_validator/validate.py 5_examples/kisti_dataon.jsonld
 ```
 
@@ -243,7 +243,7 @@ print(json.dumps(repo.to_jsonld(), ensure_ascii=False, indent=2))
 - 7개 스키마 구성요소 + 6개 패키지 요소 정의
 
 ### 9.4 작업 산출물 위치
-- 인벤토리: `D:\ARD\inventory\` (master_inventory.csv 477행)
-- 매핑: `D:\ARD\mappings\` (매트릭스 93 + 통제어 117)
-- 리포트: `D:\ARD\reports\` (Phase A/A.5/B/C 종합)
-- 본 패키지: `D:\ARD\packages\tta-0976\`
+- 인벤토리: `inventory/` (master_inventory.csv 477행)
+- 매핑: `mappings/` (매트릭스 93 + 통제어 117)
+- 리포트: `reports/` (Phase A/A.5/B/C 종합)
+- 본 패키지: `standards/P-01-research-data/`

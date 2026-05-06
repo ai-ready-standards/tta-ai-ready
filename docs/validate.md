@@ -134,7 +134,7 @@ tta-verify-mappings
 ??? question "JSON-LD 문법 오류는 어떻게 진단하나요?"
     `tta-validator`의 출력에서 `[parse-error]`로 표시됩니다. 가장 흔한 원인은 `@context` 경로 오류 또는 따옴표 누락입니다.
     
-    더 자세한 오류 메시지를 보려면 ARD 기반 `validate.py`를 사용하세요:
+    더 자세한 오류 메시지가 필요하면 표준별 전용 검증기를 사용하세요:
     ```bash
     python standards/P-01-research-data/4_validator/validate.py your-file.jsonld
     ```
