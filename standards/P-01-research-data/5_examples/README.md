@@ -47,7 +47,7 @@
 ## 검증 방법
 
 ```bash
-cd D:\ARD\packages\tta-0976\
+cd standards/P-01-research-data/
 
 # 각 예시 검증
 python 4_validator/validate.py 5_examples/kisti_dataon.jsonld
