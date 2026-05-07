@@ -165,22 +165,74 @@ ML 프레임워크(PyTorch DataLoader, TensorFlow Dataset)가 메타데이터를
 
 **조건부 활성화 패턴** (Decision-Q3/Q7): 본 표준의 Date+DateType 조합이 특정 값일 때만 PROV 필드 활성화.
 
+**의사코드**:
+
+```
+IF Date+DateType.value IN ("Created", "Issued"):
+    THEN prov:generatedAtTime 활성화
+
+ELIF Date+DateType.value == "Updated":
+    THEN prov:wasInvalidatedAtTime + prov:wasRevisionOf 활성화
+
+ELSE (Available, Submitted 등):
+    THEN PROV 필드 추가 안 함
+```
+
+!!! warning "SHACL Core 표현 한계 — Phase D-1에서 advisory로 처리"
+    PROV-O 보조 매핑(Decision-Q3/Q7)의 조건부 활성화는 SHACL Core (`sh:and`/`sh:not` 조합)으로 완전 표현이 어려움. 본 사업 P-01에서 `ProvenanceConditionalShape`은 **advisory only로 비활성** 처리되었으며, **Phase D-2에서 SHACL-AF의 `sh:rule` 또는 SHACL-SPARQL로 정식 재구현** 예정.
+    
+    상세: [Phase D-1 검증 보고서 §5.1](https://github.com/ai-ready-standards/tta-ai-ready/blob/main/reports/phase_d1_verification.md)
+
 ### 2.7 c6 품질 프로파일 (신규)
 
 데이터 품질 차원을 **W3C DQV(Data Quality Vocabulary)**로 기계화한다.
 
-**★ Boolean Activation Slot 패턴 (본 사업의 핵심 혁신)**:
+#### ★ Boolean Activation Slot 패턴 (본 사업의 핵심 혁신)
+
+리포지토리가 자기 신고로 **`QualityManagement: "yes"`** 라고 답할 때만 → 그 신고를 증명하는 품질 메타데이터(`dqv:hasQualityMetadata`)가 1개 이상 있어야 한다는 **조건부 검증**.
+
+**의사코드 (사람이 읽기 쉬운 표현)**:
+
+```
+IF Repository.QualityManagement == "yes":
+    THEN Repository.dqv:hasQualityMetadata.minCount >= 1
+
+ELIF Repository.QualityManagement IN ("no", "unknown"):
+    THEN 추가 검증 발동 안 함
+```
+
+**실제 SHACL 코드** (`shapes.shacl.ttl` 616~643행):
 
 ```turtle
-# QualityManagement="yes"일 때만 dqv:hasQualityMetadata 활성
 ttaap:QualityActivationShape a sh:NodeShape ;
-    sh:targetClass ttaap:Repository ;
-    sh:property [
-        sh:path ttaap:QualityManagement ;
-        sh:hasValue "yes" ;
-    ] .
-    # 활성 시: dqv:hasQualityMetadata 1..* 강제
+    sh:targetClass tta0976:Repository ;
+    rdfs:label "TTA-0976 Quality Activation Slot (Decision-Q4)" ;
+    rdfs:comment "★ Boolean Activation Slot 패턴: qualityManagement='yes'일 때 dqv:hasQualityMetadata 활성화" ;
+
+    # 명시적 conditional via sh:and 패턴
+    # SHACL Core에 sh:if 부재 → sh:and로 우회 표현
+    sh:and (
+        [
+            # 조건: QualityManagement = "yes"
+            sh:property [
+                sh:path re3data:qualityManagement ;
+                sh:hasValue "yes" ;
+            ] ;
+            # 결과: dqv:hasQualityMetadata 1개 이상 강제
+            sh:property [
+                sh:path dqv:hasQualityMetadata ;
+                sh:minCount 1 ;
+            ] ;
+        ]
+    ) .
 ```
+
+!!! warning "SHACL Core의 한계"
+    W3C SHACL Core (2017 권고)에는 **`sh:if` / `sh:then` 직접 문법이 없습니다.**
+    
+    위 코드는 `sh:and ([조건] [결과])` 패턴으로 우회 표현한 것이며, 일부 도구·시나리오에서 의도와 다르게 해석될 수 있습니다. **Phase D-2에서 SHACL-AF (Advanced Features)의 `sh:rule` 또는 SHACL-SPARQL로 정식 재구현 예정**입니다.
+    
+    상세: [Phase D-1 검증 보고서 §5.1](https://github.com/ai-ready-standards/tta-ai-ready/blob/main/reports/phase_d1_verification.md)
 
 **적용 차원**:
 
