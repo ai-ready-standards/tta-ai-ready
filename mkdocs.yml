@@ -112,6 +112,7 @@ nav:
           - 인벤토리 (478행): methodology/inventory.md
           - 매핑 매트릭스 (93행): methodology/mappings.md
           - 보고서 (Phase A~D): methodology/reports.md
+          - 초안 작성 진입장벽 분석 (토론용): methodology/authoring-barrier-analysis.md
       - 검증해보기 (도구): validate.md
       - 매뉴얼:
           - 개요: manuals/index.md
