@@ -1,6 +1,15 @@
-# Vocabularies — 국제 표준 어휘 캐시
+# Vocabularies — 외부 어휘 캐시 + 자체 어휘
 
-본 디렉토리는 본 사업이 매핑하는 11종 국제 어휘의 RDF 정의를 캐시한 것입니다.
+본 디렉토리는 두 종류의 어휘를 보관합니다.
+
+| 하위 디렉토리 | 용도 | 출처 |
+| --- | --- | --- |
+| [`cached/`](./cached/) | **외부 어휘 캐시** — 본 사업이 참조·매핑하는 국제 표준 어휘의 RDF 정의 | W3C, MLCommons, EBI 등 |
+| [`aird/`](./aird/) | **자체 어휘** — TTA AI Ready Data가 정의하는 한국어 권위 어휘 (SKOS Concept Scheme) | TTA PG606 |
+
+자체 어휘는 외부 어휘로 의미를 다 표현할 수 없을 때만 정의하며, 가능한 모든 자체 개념은 `mappings/aird-*-to-*.ttl` 에서 외부 어휘와의 정합성을 SKOS 매핑 술어(`skos:exactMatch` / `closeMatch` / `relatedMatch`)로 명시합니다.
+
+## 외부 어휘 캐시 (`cached/`)
 
 ## 왜 캐시하나
 
