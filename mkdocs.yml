@@ -110,3 +110,10 @@ nav:
           - 기존 표준 전환: manuals/migration-guide.md
           - 리포지토리 사용자 가이드: manuals/user-guide.md
       - 리포지토리: repository/index.md
+      - 파일럿 시연:
+          - PR-001 이슈: repository/pilots/pr-001/ISSUE.md
+          - PR-001 본문: repository/pilots/pr-001/PR.md
+          - PR-001-fix (술어 보정): repository/pilots/pr-001/PR-FIX.md
+          - PR-002 이슈 (글로사리): repository/pilots/pr-001/ISSUE-002.md
+          - PR-002 본문 (글로사리): repository/pilots/pr-001/PR-002.md
+          - 워크플로우 기록: repository/pilots/pr-001/WORKFLOW_LOG.md

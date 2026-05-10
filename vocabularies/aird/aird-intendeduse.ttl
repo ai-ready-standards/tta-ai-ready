@@ -1,0 +1,55 @@
+@prefix aird-iu: <https://ai-ready-standards.github.io/tta-ai-ready/vocab/intendeduse/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# AI Ready Data — intendedUse (목적축) Concept Scheme
+# 본 어휘는 AI Ready Data 프레임워크의 두 분류축 중 "사용 목적" 축을 정의합니다.
+# 사용 예: aird:intendedUse <https://.../vocab/intendeduse/ml-training> (다중값 허용).
+# 구조축은 aird-datatype.ttl 참조.
+
+aird-iu:IntendedUseScheme
+    a skos:ConceptScheme ;
+    dct:title "AI Ready Data — intendedUse (목적축)"@ko ,
+              "AI Ready Data — intendedUse (purpose axis)"@en ;
+    dct:issued "2026-05-10"^^xsd:date ;
+    dct:creator "TTA PG606 AI Ready Data WG" ;
+    dct:license <https://www.apache.org/licenses/LICENSE-2.0> ;
+    skos:hasTopConcept aird-iu:ml-training ,
+                       aird-iu:rag-corpus ,
+                       aird-iu:knowledge-base ,
+                       aird-iu:statistical-analysis ,
+                       aird-iu:general ;
+    rdfs:comment "데이터셋의 의도된 활용 목적을 분류한다. 데이터 구조와 직교하며, 한 데이터셋이 다중 목적을 가질 수 있다."@ko .
+
+aird-iu:ml-training
+    a skos:Concept ;
+    skos:inScheme aird-iu:IntendedUseScheme ;
+    skos:prefLabel "ML 학습용"@ko , "ML training"@en ;
+    skos:definition "기계학습 모델의 학습·검증·평가 데이터로 사용되도록 의도된 데이터셋."@ko ;
+    rdfs:comment "이 값이 부착되면 c4 운영 시맨틱(Croissant 호환 feature/label/split) 규칙이 조건부로 활성화된다."@ko .
+
+aird-iu:rag-corpus
+    a skos:Concept ;
+    skos:inScheme aird-iu:IntendedUseScheme ;
+    skos:prefLabel "RAG 코퍼스용"@ko , "RAG corpus"@en ;
+    skos:definition "검색 증강 생성(RAG) 시스템의 인덱싱·검색 대상 코퍼스로 사용되도록 의도된 데이터셋."@ko .
+
+aird-iu:knowledge-base
+    a skos:Concept ;
+    skos:inScheme aird-iu:IntendedUseScheme ;
+    skos:prefLabel "지식 베이스용"@ko , "Knowledge base"@en ;
+    skos:definition "지식 그래프·온톨로지 등 구조화된 지식 표현으로 사용되도록 의도된 데이터셋."@ko .
+
+aird-iu:statistical-analysis
+    a skos:Concept ;
+    skos:inScheme aird-iu:IntendedUseScheme ;
+    skos:prefLabel "통계 분석용"@ko , "Statistical analysis"@en ;
+    skos:definition "통계 분석·추론·정책 결정 근거로 사용되도록 의도된 데이터셋."@ko .
+
+aird-iu:general
+    a skos:Concept ;
+    skos:inScheme aird-iu:IntendedUseScheme ;
+    skos:prefLabel "범용"@ko , "General"@en ;
+    skos:definition "특정 활용 목적을 한정하지 않는 일반 데이터셋."@ko .

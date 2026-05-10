@@ -1,0 +1,42 @@
+@prefix aird-dt: <https://ai-ready-standards.github.io/tta-ai-ready/vocab/datatype/> .
+@prefix schema:  <https://schema.org/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# AI Ready Data dataType ↔ schema.org 매핑
+# 외부 어휘와의 의미적 정렬을 SKOS 매핑 술어로 표현한다.
+# - skos:exactMatch  : 완전 동일 (호환 교환 가능)
+# - skos:closeMatch  : 의미 근접 (실무상 호환)
+# - skos:relatedMatch: 연관 (직접 호환 불가, 참고용)
+
+<> a dct:Standard ;
+   dct:title "AI Ready Data dataType → schema.org Crosswalk" ;
+   dct:issued "2026-05-10"^^xsd:date ;
+   dct:source <https://schema.org/> ;
+   dct:license <https://www.apache.org/licenses/LICENSE-2.0> .
+
+# schema.org에는 데이터 구조 자체를 분류하는 1:1 어휘가 부재하므로,
+# 가장 가까운 schema.org 자원 유형/추가타입에 closeMatch 또는 relatedMatch를 부여한다.
+
+aird-dt:tabular
+    skos:broadMatch   schema:Dataset ;       # Dataset은 상위 범주 (모든 데이터셋의 일반형)
+    skos:relatedMatch schema:Table .          # schema:Table은 HTML 테이블 — 도메인 다름
+
+aird-dt:graph
+    skos:broadMatch   schema:Dataset ;
+    skos:relatedMatch schema:DataFeed .
+
+aird-dt:text
+    skos:closeMatch   schema:TextDigitalDocument ;
+    skos:narrowMatch  schema:Article .        # Article은 Text의 한 구체 형태
+
+aird-dt:image
+    skos:closeMatch   schema:ImageObject .
+
+aird-dt:multimodal
+    skos:relatedMatch schema:MediaObject .   # 단일 양식 어휘만 존재 — 합성 관계는 hierarchical 표현 불가
+
+aird-dt:time-series
+    skos:broadMatch   schema:Dataset ;
+    skos:narrowMatch  schema:Observation .   # 단일 Observation은 시계열의 한 점

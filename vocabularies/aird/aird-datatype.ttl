@@ -1,0 +1,62 @@
+@prefix aird-dt: <https://ai-ready-standards.github.io/tta-ai-ready/vocab/datatype/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# AI Ready Data — dataType (구조축) Concept Scheme
+# 본 어휘는 AI Ready Data 프레임워크의 두 분류축 중 "데이터 구조" 축을 정의합니다.
+# 사용 예: 메타데이터에 dct:type <https://.../vocab/datatype/tabular> 로 부착.
+# 목적축은 aird-intendeduse.ttl 참조.
+# (URI 베이스는 사이트 공개 URL 확정 시 일괄 갱신)
+
+aird-dt:DataTypeScheme
+    a skos:ConceptScheme ;
+    dct:title "AI Ready Data — dataType (구조축)"@ko ,
+              "AI Ready Data — dataType (structural axis)"@en ;
+    dct:issued "2026-05-10"^^xsd:date ;
+    dct:creator "TTA PG606 AI Ready Data WG" ;
+    dct:license <https://www.apache.org/licenses/LICENSE-2.0> ;
+    skos:hasTopConcept aird-dt:tabular ,
+                       aird-dt:graph ,
+                       aird-dt:text ,
+                       aird-dt:image ,
+                       aird-dt:multimodal ,
+                       aird-dt:time-series ;
+    rdfs:comment "데이터셋의 본질적 구조 형태를 분류한다. 사용 목적과 직교한다."@ko .
+
+aird-dt:tabular
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "표 형식"@ko , "Tabular"@en ;
+    skos:definition "행과 열로 구성된 정형 데이터 (CSV, RDB 테이블, Parquet 등)."@ko .
+
+aird-dt:graph
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "그래프"@ko , "Graph"@en ;
+    skos:definition "노드·엣지 구조의 그래프 데이터 (RDF, 속성 그래프, 지식 그래프 등)."@ko .
+
+aird-dt:text
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "텍스트"@ko , "Text"@en ;
+    skos:definition "자연어 문서 또는 텍스트 코퍼스."@ko .
+
+aird-dt:image
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "이미지"@ko , "Image"@en ;
+    skos:definition "정지 영상 또는 영상 프레임 집합."@ko .
+
+aird-dt:multimodal
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "다중 양식"@ko , "Multimodal"@en ;
+    skos:definition "둘 이상의 구조 유형이 결합된 데이터 (예: 이미지+캡션, 표+텍스트)."@ko .
+
+aird-dt:time-series
+    a skos:Concept ;
+    skos:inScheme aird-dt:DataTypeScheme ;
+    skos:prefLabel "시계열"@ko , "Time series"@en ;
+    skos:definition "시간 인덱스를 가진 관측값 시퀀스."@ko .
