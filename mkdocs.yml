@@ -85,32 +85,41 @@ plugins:
 
 nav:
   - 홈: index.md
-  - 표준 카탈로그:
-      - 5종 시범 표준: standards/index.md
+
+  # === A. 표준 (Standards) — 본 사업의 결과물 ===
+  # 이 그룹의 페이지들은 "AI Ready Data 형식의 5종 시범 표준" 본체이다.
+  - 표준 (Standards):
+      - 5종 시범 표준 개요: standards/index.md
       - P-01 연구데이터: standards/p-01.md
       - P-02 공공데이터: standards/p-02.md
       - P-03 태깅·라벨링: standards/p-03.md
       - P-04 농업 AI: standards/p-04.md
       - P-05 철강 제조: standards/p-05.md
-  - 스키마 레퍼런스: reference/index.md
-  - 매핑 자료실:
-      - 개요: methodology/index.md
-      - 인벤토리 (478행): methodology/inventory.md
-      - 매핑 매트릭스 (93행): methodology/mappings.md
-      - 보고서 (Phase A~D): methodology/reports.md
-  - 시작하기: getting-started.md
-  - 검증해보기: validate.md
-  - 표준 제안 라이프사이클: lifecycle.md
-  - 용어집: glossary.md
-  - 사업 문서:
-      - 프레임워크: framework/index.md
+      - 스키마 레퍼런스: reference/index.md
+      - 표준 제안 라이프사이클: lifecycle.md
+
+  # === 공통 참조 ===
+  # 표준·사업 양쪽에서 인용. 페이지 상단에 "A. 표준 관련 vs B. 사업 운영" 안내.
+  - 용어집·약어: glossary.md
+
+  # === B. 사업 방법론 (Project Methodology) ===
+  # 이 그룹의 페이지들은 "표준 본체"가 아니라 "표준을 만들고 운영하는 방법" 이다.
+  - 사업 방법론 (Project Methodology):
+      - 시작하기: getting-started.md
+      - 프레임워크 (c1~c7): framework/index.md
+      - 매핑 자료실:
+          - 개요: methodology/index.md
+          - 인벤토리 (478행): methodology/inventory.md
+          - 매핑 매트릭스 (93행): methodology/mappings.md
+          - 보고서 (Phase A~D): methodology/reports.md
+      - 검증해보기 (도구): validate.md
       - 매뉴얼:
           - 개요: manuals/index.md
           - TC 개발 가이드: manuals/tc-developer-guide.md
           - 기존 표준 전환: manuals/migration-guide.md
           - 리포지토리 사용자 가이드: manuals/user-guide.md
-      - 리포지토리: repository/index.md
-      - 파일럿 시연:
+      - 리포지토리 설계: repository/index.md
+      - 파일럿 시연 (트랙 A 운영체계 검증):
           - PR-001 이슈: repository/pilots/pr-001/ISSUE.md
           - PR-001 본문: repository/pilots/pr-001/PR.md
           - PR-001-fix (술어 보정): repository/pilots/pr-001/PR-FIX.md
