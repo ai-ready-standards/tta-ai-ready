@@ -6,7 +6,7 @@
 
 ## 1. 문제
 
-현재 [`profiles/README.md`](../../../../profiles/README.md) 는 ML / RAG / KG / 통계 4종을 모두 "목적별 프로파일"로 분류하고 있습니다. 그러나 이 4종은 카테고리가 혼합되어 있습니다.
+현재 [`profiles/README.md`](https://github.com/ai-ready-standards/tta-ai-ready/blob/feat/pilot-pr-001-multiaxis/profiles/README.md) 는 ML / RAG / KG / 통계 4종을 모두 "목적별 프로파일"로 분류하고 있습니다. 그러나 이 4종은 카테고리가 혼합되어 있습니다.
 
 | 항목 | 본질 | 현 분류 |
 | --- | --- | --- |
