@@ -11,6 +11,16 @@ hide:
 
 한국정보통신기술협회(TTA)의 AI 레디 표준 생태계 조성 사업의 공개 카탈로그입니다. 5종 시범 표준이 JSON-LD 스키마 · SHACL 검증 규칙 · 참조 구현 코드 · 예시 데이터셋 패키지로 제공됩니다.
 
+!!! info "본 사이트의 두 종류 콘텐츠"
+    좌측 네비게이션은 두 그룹으로 명확히 분리되어 있습니다.
+
+    | 그룹 | 정체 | 누구를 위한 것 |
+    | --- | --- | --- |
+    | **표준 (Standards)** | 5종 시범 표준의 AI Ready Data 형식 패키지 — 본 사업의 결과물 | 표준 사용자, 시스템 구현자, 데이터 발행자 |
+    | **사업 방법론 (Project Methodology)** | 5종 표준을 만들고 운영하기 위한 프레임워크·매뉴얼·도구·파일럿 — 본 사업의 운영 자료 | 표준 개발자, PG606 위원, 외부 기여자, 평가위원 |
+
+    **공통 참조**: [용어집·약어](glossary.md) 는 두 그룹 모두에서 인용됩니다 (페이지 상단에 영역 분류 안내).
+
 [5종 표준 둘러보기 :material-arrow-right:](standards/index.md){ .md-button .md-button--primary }
 [새 표준 제안하기 :material-rocket:](lifecycle.md){ .md-button .md-button--primary }
 [직접 검증해보기 :material-test-tube:](validate.md){ .md-button }
