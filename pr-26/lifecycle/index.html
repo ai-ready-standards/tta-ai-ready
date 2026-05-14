@@ -1,0 +1,2669 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="한국정보통신기술협회 AI 레디(AI-Ready) 표준 생태계 — 5종 시범 표준 카탈로그">
+      
+      
+        <meta name="author" content="TTA AI-Ready Standards Project">
+      
+      
+        <link rel="canonical" href="https://ai-ready-standards.github.io/tta-ai-ready/pr-26/lifecycle/">
+      
+      
+        <link rel="prev" href="../reference/">
+      
+      
+        <link rel="next" href="../glossary/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>표준 제안 라이프사이클 - TTA AI 레디 표준</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#표준-제안-라이프사이클" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="TTA AI 레디 표준" class="md-header__button md-logo" aria-label="TTA AI 레디 표준" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TTA AI 레디 표준
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              표준 제안 라이프사이클
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ai-ready-standards/tta-ai-ready" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-ready-standards/tta-ai-ready
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  홈
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../standards/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  표준 (Standards)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../glossary/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  용어집·약어
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  사업 방법론 (Project Methodology)
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TTA AI 레디 표준" class="md-nav__button md-logo" aria-label="TTA AI 레디 표준" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TTA AI 레디 표준
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ai-ready-standards/tta-ai-ready" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-ready-standards/tta-ai-ready
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../standards/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    표준 (Standards)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    표준 (Standards)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/p-01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P-01 연구데이터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/p-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P-02 공공데이터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/p-03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P-03 태깅·라벨링
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/p-04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P-04 농업 AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/p-05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P-05 철강 제조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스키마 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    표준 제안 라이프사이클
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    표준 제안 라이프사이클
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11단계-한눈에-보기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11단계 한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#단계별-github-구현" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단계별 GitHub 구현
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="단계별 GitHub 구현">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#①-과제-제안" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ① 과제 제안
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#②-접수" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ② 접수
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#③-ipr-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ③ IPR 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#④-타당성-검토" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ④ 타당성 검토
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑤-채택" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑤ 채택
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑥-ipr-재확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑥ IPR 재확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑦-초안-작성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑦ 초안 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑧-의견-수렴" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑧ 의견 수렴
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑨-의견-검토-동료-검토--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑨ 의견 검토 (동료 검토 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑩-심의-자동-검증-통과-의무--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑩ 심의 (자동 검증 통과 의무 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑪-공고-리포지토리-등록-의무화--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑪ 공고 (리포지토리 등록 의무화 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동화-vs-사람-결정의-분리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동화 vs 사람 결정의 분리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동화 vs 사람 결정의 분리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#기계가-자동으로-강제하는-것-객관적-통과-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기계가 자동으로 강제하는 것 (객관적 통과 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#사람이-결정하는-것-가치-판단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사람이 결정하는 것 (가치 판단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#일정-추정-제안자-관점" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        일정 추정 (제안자 관점)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#시범-운영-사업-진행-중" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시범 운영 (사업 진행 중)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#본-사업-산출물과의-연결" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        본 사업 산출물과의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#향후-확장-사업-종료-후" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        향후 확장 (사업 종료 후)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#참고-링크" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 링크
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    용어집·약어
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../framework/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    사업 방법론 (Project Methodology)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    사업 방법론 (Project Methodology)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../methodology/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    매핑 자료실
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    매핑 자료실
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methodology/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인벤토리 (478행)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methodology/mappings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    매핑 매트릭스 (93행)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methodology/reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보고서 (Phase A~D)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../methodology/authoring-barrier-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    초안 작성 진입장벽 분석 (토론용)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    검증해보기 (도구)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../manuals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    매뉴얼
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    매뉴얼
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manuals/tc-developer-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TC 개발 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manuals/migration-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기존 표준 전환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manuals/user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    리포지토리 사용자 가이드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    리포지토리 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    파일럿 시연 (트랙 A 운영체계 검증)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    파일럿 시연 (트랙 A 운영체계 검증)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/ISSUE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PR-001 이슈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/PR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PR-001 본문
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/PR-FIX/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PR-001-fix (술어 보정)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/ISSUE-002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PR-002 이슈 (글로사리)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/PR-002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PR-002 본문 (글로사리)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository/pilots/pr-001/WORKFLOW_LOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    워크플로우 기록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11단계-한눈에-보기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11단계 한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#단계별-github-구현" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단계별 GitHub 구현
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="단계별 GitHub 구현">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#①-과제-제안" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ① 과제 제안
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#②-접수" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ② 접수
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#③-ipr-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ③ IPR 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#④-타당성-검토" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ④ 타당성 검토
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑤-채택" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑤ 채택
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑥-ipr-재확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑥ IPR 재확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑦-초안-작성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑦ 초안 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑧-의견-수렴" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑧ 의견 수렴
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑨-의견-검토-동료-검토--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑨ 의견 검토 (동료 검토 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑩-심의-자동-검증-통과-의무--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑩ 심의 (자동 검증 통과 의무 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#⑪-공고-리포지토리-등록-의무화--신설" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑪ 공고 (리포지토리 등록 의무화 — 신설)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동화-vs-사람-결정의-분리" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동화 vs 사람 결정의 분리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동화 vs 사람 결정의 분리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#기계가-자동으로-강제하는-것-객관적-통과-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기계가 자동으로 강제하는 것 (객관적 통과 기준)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#사람이-결정하는-것-가치-판단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사람이 결정하는 것 (가치 판단)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#일정-추정-제안자-관점" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        일정 추정 (제안자 관점)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#시범-운영-사업-진행-중" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시범 운영 (사업 진행 중)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#본-사업-산출물과의-연결" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        본 사업 산출물과의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#향후-확장-사업-종료-후" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        향후 확장 (사업 종료 후)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#참고-링크" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        참고 링크
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="표준-제안-라이프사이클">표준 제안 라이프사이클<a class="headerlink" href="#표준-제안-라이프사이클" title="Permanent link">&para;</a></h1>
+<p>본 페이지는 <strong>새로운 메타데이터 표준안이 제안되어 정식 발행되기까지의 라이프사이클</strong>을 설명합니다.</p>
+<p>본 라이프사이클은 TTA 표준 제·개정의 <strong>공식 11단계 프로세스</strong>를 GitHub 메커니즘으로 자동화한 것이며, <a href="../framework/#13-본-정의서와-다른-산출물의-관계">표준화 지침 개정안 (B-10)</a>의 핵심 구현부입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">신규 표준을 제안하시려면</p>
+<p>바로 <a href="https://github.com/ai-ready-standards/tta-ai-ready/issues/new?template=proposal-new-standard.md">신규 AI 레디 표준 제안 Issue</a>에서 시작하실 수 있습니다.</p>
+</div>
+<hr />
+<h2 id="11단계-한눈에-보기">11단계 한눈에 보기<a class="headerlink" href="#11단계-한눈에-보기" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TB
+    S0["① 과제 제안&lt;br/&gt;━━━&lt;br/&gt;제안자가 GitHub Issue 작성"]
+    S1["② 접수&lt;br/&gt;━━━&lt;br/&gt;자동 라벨링 + PG606 알림"]
+    S2["③ IPR 확인&lt;br/&gt;━━━&lt;br/&gt;저작권·라이선스 확약 검증"]
+    S3["④ 타당성 검토&lt;br/&gt;━━━&lt;br/&gt;PG606 사무국 (2~4주)"]
+    S4["⑤ 채택&lt;br/&gt;━━━&lt;br/&gt;라벨 변경: proposal:adopted"]
+    S5["⑥ IPR 재확인&lt;br/&gt;━━━&lt;br/&gt;변동 점검"]
+    S6["⑦ 초안 작성&lt;br/&gt;━━━&lt;br/&gt;제안자가 6-패키지 PR 생성"]
+    S7["⑧ 의견 수렴&lt;br/&gt;━━━&lt;br/&gt;PR 공개 댓글 수렴"]
+    S8["⑨ 의견 검토 (동료 검토)&lt;br/&gt;━━━&lt;br/&gt;CODEOWNERS + TTA 주관 자문위원회"]
+    S9["⑩ 심의&lt;br/&gt;━━━&lt;br/&gt;CI 자동 통과 강제"]
+    S10["⑪ 공고&lt;br/&gt;━━━&lt;br/&gt;PR 머지 + git tag + 사이트 배포"]
+
+    S0 --&gt; S1 --&gt; S2 --&gt; S3 --&gt; S4 --&gt; S5 --&gt; S6 --&gt; S7 --&gt; S8 --&gt; S9 --&gt; S10
+
+    style S0 fill:#FFF8DC,stroke:#1F3D7A,stroke-width:3px
+    style S6 fill:#FFF8DC,stroke:#1F3D7A,stroke-width:3px
+    style S9 fill:#FFF8DC,stroke:#1F3D7A,stroke-width:3px
+    style S10 fill:#FFF8DC,stroke:#1F3D7A,stroke-width:3px
+    style S1 fill:#F0F4FA,stroke:#1F3D7A
+    style S2 fill:#F0F4FA,stroke:#1F3D7A
+    style S3 fill:#F5F8FB,stroke:#5A7FB8
+    style S4 fill:#F5F8FB,stroke:#5A7FB8
+    style S5 fill:#FAFCFE,stroke:#7AA3D5
+    style S7 fill:#F5F8FB,stroke:#5A7FB8
+    style S8 fill:#F5F8FB,stroke:#5A7FB8</code></pre>
+<p>진한 노란색 4단계가 <strong>본 사업이 기존 11단계에 자동 검증·동료 검토·리포지토리 등록을 의무화한 핵심 개정 포인트</strong> (<a href="https://github.com/ai-ready-standards/tta-ai-ready/blob/main/standards/">수행계획서 B-4</a> 참조).</p>
+<hr />
+<h2 id="단계별-github-구현">단계별 GitHub 구현<a class="headerlink" href="#단계별-github-구현" title="Permanent link">&para;</a></h2>
+<h3 id="①-과제-제안">① 과제 제안<a class="headerlink" href="#①-과제-제안" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>제안자 (TC 담당자 또는 외부 전문가)</td>
+</tr>
+<tr>
+<td>어디서</td>
+<td>GitHub Issue</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td><a href="https://github.com/ai-ready-standards/tta-ai-ready/issues/new?template=proposal-new-standard.md">신규 표준 제안 양식</a> 작성</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>수동</td>
+</tr>
+</tbody>
+</table>
+<h3 id="②-접수">② 접수<a class="headerlink" href="#②-접수" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>시스템 자동</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td><code>proposal:received</code> + <code>needs-feasibility-review</code> 라벨 자동 부여, PG606 사무국 자동 알림</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td><strong>자동</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="③-ipr-확인">③ IPR 확인<a class="headerlink" href="#③-ipr-확인" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>PG606 사무국</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>Issue 양식 6번 IPR 확약 항목 4개 모두 체크 확인. 첨부 IPR 확약서 검증</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>반자동 (체크박스 자동 검증 + 첨부 수동 검토)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="④-타당성-검토">④ 타당성 검토<a class="headerlink" href="#④-타당성-검토" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>PG606 사무국 + (필요 시) 도메인 전문가</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>다음 항목 검토:<br/>• 도메인 적합성<br/>• 기존 표준과의 중복·충돌<br/>• 기관 신뢰성<br/>• 7-구성요소 사전 분석의 타당성<br/>• 일정 현실성</td>
+</tr>
+<tr>
+<td>결과</td>
+<td>라벨 <code>feasibility:approved</code> 또는 <code>feasibility:rejected</code></td>
+</tr>
+<tr>
+<td>소요 시간</td>
+<td>2~4주</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>수동 (PG606 결정)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑤-채택">⑤ 채택<a class="headerlink" href="#⑤-채택" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>PG606</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>라벨 <code>proposal:adopted</code> 부여, GitHub Project 보드의 "채택됨" 컬럼으로 이동</td>
+</tr>
+<tr>
+<td>결과</td>
+<td>제안자가 ⑦ 초안 작성으로 진행 가능</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>수동</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑥-ipr-재확인">⑥ IPR 재확인<a class="headerlink" href="#⑥-ipr-재확인" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>무엇을</td>
+<td>채택 후 ~ 초안 작성 시작 사이 변경된 권리 관계 재확인</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>수동</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑦-초안-작성">⑦ 초안 작성<a class="headerlink" href="#⑦-초안-작성" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>제안자</td>
+</tr>
+<tr>
+<td>어디서</td>
+<td>GitHub PR (<code>feat/p-XX-domain</code> 브랜치)</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td><strong>6-패키지 구조</strong> 작성:<br/>1. <code>1_document/&lt;id&gt;-AP.md</code><br/>2. <code>2_schema/context.jsonld + shapes.shacl.ttl</code><br/>3. <code>3_code/</code> Python Pydantic + 단위 테스트<br/>4. <code>4_validator/</code><br/>5. <code>5_examples/</code> 실제 시나리오 3종 이상<br/>6. <code>6_changelog/CHANGELOG.md</code></td>
+</tr>
+<tr>
+<td>가이드</td>
+<td><a href="../manuals/tc-developer-guide/">TC 개발 가이드</a> + <a href="../manuals/migration-guide/">기존 표준 전환 매뉴얼</a></td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>수동 (작성)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑧-의견-수렴">⑧ 의견 수렴<a class="headerlink" href="#⑧-의견-수렴" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>어디서</td>
+<td>PR Conversation (공개)</td>
+</tr>
+<tr>
+<td>누가</td>
+<td>누구나 (GitHub 계정 보유자)</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>PR 코멘트로 의견 제시</td>
+</tr>
+<tr>
+<td>기간</td>
+<td>최소 2주 (개정안에서 의무화)</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td><strong>자동</strong> (PR 공개 자체로 수렴)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑨-의견-검토-동료-검토--신설">⑨ 의견 검토 (동료 검토 — 신설)<a class="headerlink" href="#⑨-의견-검토-동료-검토--신설" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>CODEOWNERS 자동 지정 + <strong>TTA 주관 자문위원회</strong> (내부 PG606·SPC·TC6 + 외부 학계·산업계·국제, 8~10인)</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>서면 검토 의견서 작성, 쟁점 사안은 자문위원회 회의</td>
+</tr>
+<tr>
+<td>통과 기준</td>
+<td>CODEOWNERS Approval + 자문위원회 검토 의견 90% 이상 반영</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>반자동 (자동 reviewer 지정 + 자문위 정기 검토)</td>
+</tr>
+<tr>
+<td>사업 후</td>
+<td>본 사업 종료 후 <strong>TTA 상시 자문위원회</strong>로 전환 (운영 이관)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⑩-심의-자동-검증-통과-의무--신설">⑩ 심의 (자동 검증 통과 의무 — 신설)<a class="headerlink" href="#⑩-심의-자동-검증-통과-의무--신설" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>GitHub Actions CI</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>다음 4가지 모두 통과해야 머지 가능:<br/>• <code>tta-verify-mappings</code> 100% 통과<br/>• <code>pytest</code> 단위 테스트 모두 통과 + 커버리지 80%+<br/>• 모든 <code>5_examples/*.jsonld</code>이 SHACL conform<br/>• Ruff 린트 경고 0건</td>
+</tr>
+<tr>
+<td>결과</td>
+<td>빨간 ❌ 또는 ✅</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td><strong>완전 자동</strong></td>
+</tr>
+</tbody>
+</table>
+<p>→ ⑩ 단계는 <strong>사람의 결정 없이 100% 자동</strong>입니다. 기준 미달 시 PR 머지 차단.</p>
+<h3 id="⑪-공고-리포지토리-등록-의무화--신설">⑪ 공고 (리포지토리 등록 의무화 — 신설)<a class="headerlink" href="#⑪-공고-리포지토리-등록-의무화--신설" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누가</td>
+<td>PM (단일 머지 권한)</td>
+</tr>
+<tr>
+<td>무엇을</td>
+<td>PR 머지 → main 반영</td>
+</tr>
+<tr>
+<td>자동 후속</td>
+<td>• main push 시 GitHub Pages 자동 재배포<br/>• <code>git tag</code> 자동 (예: <code>P-06/v1.0.0</code>)<br/>• catalog.jsonld 자동 갱신<br/>• re3data 등록 (해당 시)</td>
+</tr>
+<tr>
+<td>자동/수동</td>
+<td>머지 수동 + 후속 자동</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="자동화-vs-사람-결정의-분리">자동화 vs 사람 결정의 분리<a class="headerlink" href="#자동화-vs-사람-결정의-분리" title="Permanent link">&para;</a></h2>
+<p>본 라이프사이클의 핵심 가치는 <strong>무엇은 기계가 강제하고 무엇은 사람이 결정하는지의 명확화</strong>입니다.</p>
+<h3 id="기계가-자동으로-강제하는-것-객관적-통과-기준">기계가 자동으로 강제하는 것 (객관적 통과 기준)<a class="headerlink" href="#기계가-자동으로-강제하는-것-객관적-통과-기준" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ JSON-LD 문법 0건 오류</li>
+<li>✅ SHACL 적합성 (모든 examples conform)</li>
+<li>✅ 매핑 어휘 100% 정합 (정식 어휘에 정의됨)</li>
+<li>✅ 단위 테스트 80%+ 커버리지</li>
+<li>✅ 6-패키지 구조 완전성</li>
+</ul>
+<p>→ 이 자동 기준 미달이면 <strong>PG606·SPC가 심의조차 못함</strong>.</p>
+<h3 id="사람이-결정하는-것-가치-판단">사람이 결정하는 것 (가치 판단)<a class="headerlink" href="#사람이-결정하는-것-가치-판단" title="Permanent link">&para;</a></h3>
+<ul>
+<li>⚖️ 도메인 적합성 (PG606)</li>
+<li>⚖️ 본문 vs 부록 충돌 해결 (TC 의장)</li>
+<li>⚖️ 매핑 신뢰도 평가 (외부 전문가)</li>
+<li>⚖️ 채택·반려 (PG606 + SPC)</li>
+</ul>
+<p>→ 사람의 판단은 <strong>가치 결정에만 집중</strong>.</p>
+<hr />
+<h2 id="일정-추정-제안자-관점">일정 추정 (제안자 관점)<a class="headerlink" href="#일정-추정-제안자-관점" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>소요 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 과제 제안</td>
+<td>1일</td>
+</tr>
+<tr>
+<td>② 접수 ~ ③ IPR 확인</td>
+<td>1주</td>
+</tr>
+<tr>
+<td>④ 타당성 검토 ~ ⑤ 채택</td>
+<td>2~4주</td>
+</tr>
+<tr>
+<td>⑥ IPR 재확인</td>
+<td>수일</td>
+</tr>
+<tr>
+<td>⑦ 초안 작성</td>
+<td><strong>표준 종류에 따라 6~16주</strong> (<a href="../manuals/migration-guide/#부록--전환-작업-일정-추정">기존 표준 전환 매뉴얼 → 일정 추정</a>)</td>
+</tr>
+<tr>
+<td>⑧ 의견 수렴</td>
+<td>2~4주</td>
+</tr>
+<tr>
+<td>⑨ 의견 검토</td>
+<td>2주</td>
+</tr>
+<tr>
+<td>⑩ 심의</td>
+<td>분 ~ 시간 (자동)</td>
+</tr>
+<tr>
+<td>⑪ 공고</td>
+<td>즉시</td>
+</tr>
+<tr>
+<td><strong>총 합</strong></td>
+<td><strong>약 4~6개월</strong></td>
+</tr>
+</tbody>
+</table>
+<p>→ 기존 TTA 11단계 평균 6~12개월 대비 <strong>30~50% 단축 가능</strong>.</p>
+<hr />
+<h2 id="시범-운영-사업-진행-중">시범 운영 (사업 진행 중)<a class="headerlink" href="#시범-운영-사업-진행-중" title="Permanent link">&para;</a></h2>
+<p>본 사업의 5종 시범 표준은 본 라이프사이클의 <strong>reference implementation</strong>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>표준</th>
+<th>라이프사이클 적용 시점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P-01 (TTAK.KO-10.0976)</td>
+<td>적용 완료 (AP 1.0.0 발행됨)</td>
+</tr>
+<tr>
+<td>P-02 ~ P-05</td>
+<td>2026-08~11 진행</td>
+</tr>
+<tr>
+<td>사업 종료 후</td>
+<td>TTA의 모든 신규 메타데이터 표준에 적용</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="본-사업-산출물과의-연결">본 사업 산출물과의 연결<a class="headerlink" href="#본-사업-산출물과의-연결" title="Permanent link">&para;</a></h2>
+<p>본 라이프사이클은 본 사업의 모든 산출물을 하나로 연결합니다.</p>
+<table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>라이프사이클 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../framework/">프레임워크 정의서 (B-3)</a></td>
+<td>⑦ 초안이 따라야 할 규범</td>
+</tr>
+<tr>
+<td>표준화 지침 개정안 (B-10)</td>
+<td>본 라이프사이클의 제도적 정의</td>
+</tr>
+<tr>
+<td><a href="../manuals/tc-developer-guide/">TC 개발 가이드 (D-2)</a></td>
+<td>⑦ 초안 작성자 가이드</td>
+</tr>
+<tr>
+<td><a href="../manuals/migration-guide/">전환 매뉴얼 (D-3)</a></td>
+<td>⑦ 단계별 실행 가이드</td>
+</tr>
+<tr>
+<td>검증 도구 (tta-validator)</td>
+<td>⑩ 자동 심의 도구</td>
+</tr>
+<tr>
+<td>5종 파일럿 패키지</td>
+<td>⑦의 reference implementation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="향후-확장-사업-종료-후">향후 확장 (사업 종료 후)<a class="headerlink" href="#향후-확장-사업-종료-후" title="Permanent link">&para;</a></h2>
+<p>본 라이프사이클은 메타데이터 표준에서 출발하지만, 다음으로 확장 가능합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Phase 1 (본 사업, ~2026-12)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── 메타데이터 스키마 표준 라이프사이클
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Phase 2 (2027~)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>└── 원시 데이터 표준 라이프사이클 (시계열, 영상, 센서 등)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Phase 3 (장기)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>└── 인터페이스 표준 (API, gRPC), 품질 표준 등으로 확장
+</code></pre></div>
+<p>→ TTA 전체 PG의 표준화 절차에 적용 가능한 <strong>일반 메커니즘</strong>.</p>
+<hr />
+<h2 id="참고-링크">참고 링크<a class="headerlink" href="#참고-링크" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a class="md-button md-button--primary" href="https://github.com/ai-ready-standards/tta-ai-ready/issues/new?template=proposal-new-standard.md">신규 표준 제안 시작 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 22-3.86-1.55c.7-1.53 1.2-3.11 1.51-4.72zM7.86 20.45 4 22l2.35-6.27c.31 1.61.81 3.19 1.51 4.72M12 2s5 2 5 10c0 3.1-.75 5.75-1.67 7.83A2 2 0 0 1 13.5 21h-3a2 2 0 0 1-1.83-1.17C7.76 17.75 7 15.1 7 12c0-8 5-10 5-10m0 10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2"/></svg></span></a></li>
+<li><a class="md-button" href="https://github.com/ai-ready-standards/tta-ai-ready/issues?q=label%3Aproposal%3Areceived">기존 제안 일람</a></li>
+<li><a class="md-button" href="https://github.com/ai-ready-standards/tta-ai-ready/issues?q=label%3Aproposal%3Aadopted">채택된 제안 일람</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../reference/" class="md-footer__link md-footer__link--prev" aria-label="이전: 스키마 레퍼런스">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                스키마 레퍼런스
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../glossary/" class="md-footer__link md-footer__link--next" aria-label="다음: 용어집·약어">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                용어집·약어
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 TTA · 본 사이트는 사업 진행 단계의 결과물이며 정식 표준은 TTA 발간물을 따른다.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ai-ready-standards/tta-ai-ready" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.tabs.link", "content.tooltips", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
