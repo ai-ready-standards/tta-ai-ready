@@ -6,7 +6,7 @@ WBS C-1 산출물. 2단계(2026.07~08) 완료 시 발주처 납품 예정.
 
 - **이중 트랙**: GitLab Enterprise (TTA 자체 서버) + GitHub 공개 미러 (본 저장소)
 - **디렉토리 구조**: `/standards`, `/profiles`, `/tools`, `/docs`
-- **3계층 권한**: TC 편집자 / 일반 열람자 / 자동화 봇
+- **3계층 권한**: 코어 팀 / 일반 열람자 / 자동화 봇
 - **CI/CD**: 5단계 자동 검증 (RDF 문법 → SHACL → JSON-LD → pytest → 예시 로딩)
 - **배포**: npm · PyPI 자동 배포 파이프라인
 

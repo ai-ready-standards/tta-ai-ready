@@ -105,7 +105,7 @@ hide:
 
 | 대상 | 추천 시작점 |
 | --- | --- |
-| TC 담당자 / 표준 개발자 | [시작하기 → TC 편집자](getting-started.md#tc-편집자) |
+| 제안자 / 표준 개발자 | [시작하기 → 제안자](getting-started.md#제안자) |
 | 일반 연구자 / 데이터 사용자 | [시작하기 → 데이터 사용자](getting-started.md#데이터-사용자) |
 | 개발자 / AI 시스템 통합 | [시작하기 → 개발자](getting-started.md#개발자) |
 | 평가위원 / 발주처 | [사업 문서](framework/index.md) |
