@@ -2232,7 +2232,7 @@
 <td>단기 (1~2개월)</td>
 </tr>
 <tr>
-<td><strong>(다) Markdown DSL<sup id="fnref:dsl"><a class="footnote-ref" href="#fn:dsl">1</a></sup> + 빌드 도구</strong></td>
+<td><strong>(다) Markdown DSL<sup id="fnref3:dsl"><a class="footnote-ref" href="#fn:dsl">1</a></sup> + 빌드 도구</strong></td>
 <td>가벼운 markdown 양식에 요소 정의 → 도구가 RDF로 변환</td>
 <td>중 (DSL 설계 + 변환 도구)</td>
 <td>중</td>
@@ -2266,7 +2266,7 @@
 - 변환 도구 자체의 유지보수 부담 (외부 어휘 갱신·새 패턴 추가 시)
 - 첫 변환 결과는 sub-optimal일 가능성 (수동 보정 필요)</p>
 <p><strong>비고</strong>: 본 사업 C-2 산출물(검증 도구)에 자연스럽게 묶일 수 있음.</p>
-<h4 id="다-markdown-dsl--빌드-도구">(다) Markdown DSL + 빌드 도구<a class="headerlink" href="#다-markdown-dsl--빌드-도구" title="Permanent link">&para;</a></h4>
+<h4 id="다-markdown-dsl--빌드-도구">(다) Markdown DSL<sup id="fnref:dsl"><a class="footnote-ref" href="#fn:dsl">1</a></sup> + 빌드 도구<a class="headerlink" href="#다-markdown-dsl--빌드-도구" title="Permanent link">&para;</a></h4>
 <p><strong>구체 방식</strong>: 가벼운 markdown 헤더 양식. 예:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gu">## D2 식별자 (Identifier)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">-</span><span class="w"> </span>mro: M
@@ -2277,7 +2277,7 @@
 </code></pre></div>
 <p>빌드 시 변환 도구가 markdown → JSON-LD/SHACL.</p>
 <p><strong>장점</strong>: human-readable, version control 친화, mkdocs 와 자연 호환.
-<strong>단점</strong>: 제안자가 markdown 자체를 학습해야 함 (Excel보다 진입장벽 높음). DSL 설계 자체에 시간 소요.</p>
+<strong>단점</strong>: 제안자가 markdown 자체를 학습해야 함 (Excel보다 진입장벽 높음). DSL<sup id="fnref2:dsl"><a class="footnote-ref" href="#fn:dsl">1</a></sup> 설계 자체에 시간 소요.</p>
 <h4 id="라-웹-폼-마법사">(라) 웹 폼 마법사<a class="headerlink" href="#라-웹-폼-마법사" title="Permanent link">&para;</a></h4>
 <p><strong>구체 방식</strong>: 사이트 내 단계별 폼. "표준명" → "요소 추가" → "각 요소 정의" → "검증 규칙" → "JSON-LD 다운로드" 흐름.</p>
 <p><strong>장점</strong>: 가장 낮은 진입장벽. 가이드된 입력으로 오류 최소화.
@@ -2338,7 +2338,7 @@
 </tr>
 <tr>
 <td>(다)</td>
-<td>중 (DSL 설계 + 변환 도구 2~3 MM)</td>
+<td>중 (DSL<sup id="fnref4:dsl"><a class="footnote-ref" href="#fn:dsl">1</a></sup> 설계 + 변환 도구 2~3 MM)</td>
 <td>본 사업 기술팀</td>
 <td>도구 + DSL 진화 관리</td>
 </tr>
@@ -2411,7 +2411,7 @@
 <li id="fn:dsl">
 <p><strong>DSL (Domain-Specific Language)</strong>: 하나의 일만 잘하도록 좁게 설계된 컴퓨터 언어. 익숙한 예 — SQL(DB 질의), HTML(웹 페이지), Markdown(문서 포맷팅), 정규표현식(텍스트 패턴). 본 사업 맥락에서 "Markdown DSL" 은 표준 요소 정의만을 위해 markdown을 좁게 변형한 양식을 의미한다.
 | <strong>(라) 웹 폼 마법사</strong> | 사이트 안에 인터랙티브 폼 → 입력 후 JSON-LD 다운로드 | 높 (frontend + backend) | 중 | 중기 |
-| <strong>(마) AI 도우미 (LLM 기반)</strong> | 자연어 또는 Word 업로드 → LLM이 JSON-LD/SHACL 초안 생성 → 사람 검토 | 매우 높 (또는 외부 API 비용) | 높 | 중장기 (본 사업 후속) |&#160;<a class="footnote-backref" href="#fnref:dsl" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+| <strong>(마) AI 도우미 (LLM 기반)</strong> | 자연어 또는 Word 업로드 → LLM이 JSON-LD/SHACL 초안 생성 → 사람 검토 | 매우 높 (또는 외부 API 비용) | 높 | 중장기 (본 사업 후속) |&#160;<a class="footnote-backref" href="#fnref:dsl" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:dsl" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:dsl" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:dsl" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
