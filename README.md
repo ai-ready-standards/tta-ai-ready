@@ -1,6 +1,6 @@
 # TTA AI-Ready Standards Repository
 
-> AI 레디(AI-Ready) 표준 생태계 조성을 위한 표준화 전략 수립 용역 — 공개 미러
+> AI 레디(AI-Ready) 표준 생태계 조성을 위한 표준화 전략 수립 용역 — 공식 저장소
 >
 > 한국정보통신기술협회(TTA) 발주 사업의 산출물(JSON-LD 스키마, SHACL 검증 파일, 참조 구현 코드, 예시 데이터셋, 매뉴얼)을 공개·배포하는 GitHub 저장소입니다.
 
@@ -82,9 +82,17 @@ mkdocs serve
 
 ## 운영 모델
 
-- **마스터 저장소**: TTA 내부망 GitLab Enterprise (개발·심의·승인)
-- **공개 미러**: 본 GitHub 저장소 (자동 검증·승인 통과한 패키지만 동기화)
+본 사업의 모든 산출물 작업·심의·승인·공개가 **단일 GitHub 조직** (`ai-ready-standards`) 안에서 진행됩니다.
+
+| 시기 | GitHub Organization 소유 | 비고 |
+| --- | --- | --- |
+| **사업 진행 중 (2026.05 ~ 2026.12)** | 본 사업 수행사 | 운영·심의·공개를 단일 저장소에서 처리 |
+| **사업 종료 후 (2027~)** | 한국정보통신기술협회 (TTA) | GitHub Org 소유권 + 분기 보호 규칙 + CODEOWNERS가 TTA로 이관 |
+
+- **직접 푸시**: 코어 팀 (CODEOWNERS 참조) 에 한정
+- **외부 기여**: GitHub Issue + Pull Request (fork) 방식
 - **자동 배포**: main 브랜치 push 시 GitHub Pages 자동 갱신
+- **운영 이관 산출물**: D-9 운영 이관 패키지 (수행계획서 신설 항목)
 
 ## 문의
 
