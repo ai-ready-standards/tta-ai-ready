@@ -1,6 +1,6 @@
 {
   "_comment": "12종 국제 표준 어휘 캐시 메니페스트. tta-verify-mappings가 이 메니페스트를 읽어 매핑 검증을 수행한다. 갱신은 vocab-refresh.yml 워크플로우가 주 1회 자동 실행한다.",
-  "generated_at": "2026-05-04",
+  "generated_at": "2026-09-07",
   "vocabularies": [
     {
       "prefix": "dqv",
